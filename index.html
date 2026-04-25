@@ -221,10 +221,10 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
   <div class="brain-row">
     <div class="brain-score-card">
       <div class="bs-label">Your brain today</div>
-      <div class="bs-number">819</div>
+      <div class="bs-number" id="brain-score-num">799</div>
       <div class="bs-sub">Brain Score · Level 8</div>
-      <div class="bs-bar-wrap"><div class="bs-bar"></div></div>
-      <div class="bs-bar-label">19 / 200 XP to Level 9</div>
+      <div class="bs-bar-wrap"><div class="bs-bar" id="bs-xp-bar" style="width:0%;transition:width 3s ease-in-out;"></div></div>
+      <div class="bs-bar-label" id="bs-xp-label">0 / 200 XP to Level 9</div>
     </div>
     <div class="brain-regions">
       <div class="region-row"><div class="region-top"><span class="region-name" style="color:var(--orange);">Memory</span><span class="region-pct" style="color:var(--orange);">83%</span></div><div class="region-bar"><div class="region-fill" style="width:83%;background:var(--orange);"></div></div></div>
@@ -513,6 +513,44 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
 
   renderLB();
   setInterval(updateScores, 2200);
+})();
+</script>
+<script>
+// ── BRAIN SCORE ANIMATION ──
+(function(){
+  var scoreEl = document.getElementById('brain-score-num');
+  var barEl   = document.getElementById('bs-xp-bar');
+  var labelEl = document.getElementById('bs-xp-label');
+
+  var start = 799, end = 829;
+  var xpStart = 0, xpEnd = 50; // percent
+  var xpNumEnd = 100; // out of 200 XP
+  var duration = 1200;
+  var startTime = null;
+
+  function easeOut(t){ return 1 - Math.pow(1-t, 3); }
+
+  function animate(ts){
+    if(!startTime) startTime = ts;
+    var elapsed = ts - startTime;
+    var progress = Math.min(elapsed / duration, 1);
+    var eased = easeOut(progress);
+
+    var currentScore = Math.round(start + (end - start) * eased);
+    var currentXP    = Math.round(xpStart + xpNumEnd * eased);
+    var currentBar   = xpStart + xpEnd * eased;
+
+    scoreEl.textContent = currentScore;
+    barEl.style.width   = currentBar + '%';
+    labelEl.textContent = currentXP + ' / 200 XP to Level 9';
+
+    if(progress < 1) requestAnimationFrame(animate);
+  }
+
+  // Start after a short delay so user sees it happen
+  setTimeout(function(){
+    requestAnimationFrame(animate);
+  }, 800);
 })();
 </script>
 </body>

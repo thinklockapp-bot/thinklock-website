@@ -56,8 +56,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 2
 .soma-halo{position:absolute;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,0.18) 0%,transparent 70%);animation:halo 3.5s ease-in-out infinite;}
 @keyframes halo{0%,100%{transform:scale(1);opacity:.7;}50%{transform:scale(1.12);opacity:1;}}
 .soma-blink-wrap{position:relative;width:190px;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 10px 30px rgba(34,211,238,0.2));z-index:3;}
-.soma-img-hero{width:190px;display:block;}
-.soma-img-closed{position:absolute;top:0;left:0;width:190px;opacity:0;}
+#soma-open{width:190px;display:block;}
+#soma-closed{width:190px;position:absolute;top:0;left:0;opacity:0;}
 @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);}}
 
 .store-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0 48px;position:relative;z-index:2;}
@@ -201,8 +201,8 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
   <div class="soma-stage">
     <div class="soma-halo"></div>
     <div class="soma-blink-wrap">
-      <img id="soma-open" src="soma_main.png" alt="Soma" class="soma-img-hero">
-      <img id="soma-closed" src="soma_blink.png" alt="Soma blinking" class="soma-img-hero soma-img-closed">
+      <img id="soma-open" src="soma_main.png" alt="Soma">
+      <img id="soma-closed" src="soma_blink.png" alt="Soma blinking">
     </div>
   </div>
 

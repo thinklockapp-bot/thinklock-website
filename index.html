@@ -240,34 +240,51 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
   <h2 class="section-title">Make it <span class="hl-magenta">social.</span> Make it <span class="hl-magenta">live.</span></h2>
   <p class="section-sub" style="margin-bottom:28px;">Real-time 1v1 matches and a global leaderboard updated every second.</p>
   <div class="cards-split">
+
+    <!-- ANIMATED LIVE MATCH CARD -->
     <div class="match-card">
-      <div class="match-header"><div class="live-pill"><div class="live-dot"></div>LIVE</div><span class="round-txt">Round 6 / 10</span></div>
-      <div class="prog-bar"><div class="prog-fill"></div></div>
+      <div class="match-header">
+        <div class="live-pill"><div class="live-dot"></div>LIVE</div>
+        <span class="round-txt" id="m-round">Round 1 / 10</span>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" id="m-prog" style="width:10%;transition:width 0.6s ease;"></div></div>
       <div class="vs-area">
-        <div class="player"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gZWFycyAtLT4KICA8cG9seWdvbiBwb2ludHM9IjIyLDQyIDMyLDE4IDQyLDQyIiBmaWxsPSIjRTg2MTFBIi8+CiAgPHBvbHlnb24gcG9pbnRzPSI1OCw0MiA2OCwxOCA3OCw0MiIgZmlsbD0iI0U4NjExQSIvPgogIDxwb2x5Z29uIHBvaW50cz0iMjYsNDAgMzIsMjQgMzgsNDAiIGZpbGw9IiNGNUE2MjMiLz4KICA8cG9seWdvbiBwb2ludHM9IjYyLDQwIDY4LDI0IDc0LDQwIiBmaWxsPSIjRjVBNjIzIi8+CiAgPCEtLSBoZWFkIC0tPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjU4IiByeD0iMjYiIHJ5PSIyMiIgZmlsbD0iI0U4NjExQSIvPgogIDwhLS0gbXV6emxlIC0tPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjY4IiByeD0iMTQiIHJ5PSIxMCIgZmlsbD0iI0Y1RDBBMCIvPgogIDwhLS0gZXllcyAtLT4KICA8Y2lyY2xlIGN4PSI0MCIgY3k9IjU0IiByPSI1IiBmaWxsPSIjMWExZjM1Ii8+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSI1NCIgcj0iNSIgZmlsbD0iIzFhMWYzNSIvPgogIDxjaXJjbGUgY3g9IjQxIiBjeT0iNTMiIHI9IjIiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iNjEiIGN5PSI1MyIgcj0iMiIgZmlsbD0id2hpdGUiLz4KICA8IS0tIG5vc2UgLS0+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjYiIHJ4PSIzIiByeT0iMiIgZmlsbD0iIzMzMyIvPgogIDwhLS0gbW91dGggLS0+CiAgPHBhdGggZD0iTTQ3IDY4IFE1MCA3MiA1MyA2OCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==" style="width:48px;height:48px;border-radius:50%;border:2px solid var(--purple);object-fit:cover;"><span class="p-name">You</span><span class="p-score sc-you">6</span></div>
+        <div class="player">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gZWFycyAtLT4KICA8cG9seWdvbiBwb2ludHM9IjIyLDQyIDMyLDE4IDQyLDQyIiBmaWxsPSIjRTg2MTFBIi8+CiAgPHBvbHlnb24gcG9pbnRzPSI1OCw0MiA2OCwxOCA3OCw0MiIgZmlsbD0iI0U4NjExQSIvPgogIDxwb2x5Z29uIHBvaW50cz0iMjYsNDAgMzIsMjQgMzgsNDAiIGZpbGw9IiNGNUE2MjMiLz4KICA8cG9seWdvbiBwb2ludHM9IjYyLDQwIDY4LDI0IDc0LDQwIiBmaWxsPSIjRjVBNjIzIi8+CiAgPCEtLSBoZWFkIC0tPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjU4IiByeD0iMjYiIHJ5PSIyMiIgZmlsbD0iI0U4NjExQSIvPgogIDwhLS0gbXV6emxlIC0tPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjY4IiByeD0iMTQiIHJ5PSIxMCIgZmlsbD0iI0Y1RDBBMCIvPgogIDwhLS0gZXllcyAtLT4KICA8Y2lyY2xlIGN4PSI0MCIgY3k9IjU0IiByPSI1IiBmaWxsPSIjMWExZjM1Ii8+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSI1NCIgcj0iNSIgZmlsbD0iIzFhMWYzNSIvPgogIDxjaXJjbGUgY3g9IjQxIiBjeT0iNTMiIHI9IjIiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iNjEiIGN5PSI1MyIgcj0iMiIgZmlsbD0id2hpdGUiLz4KICA8IS0tIG5vc2UgLS0+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjYiIHJ4PSIzIiByeT0iMiIgZmlsbD0iIzMzMyIvPgogIDwhLS0gbW91dGggLS0+CiAgPHBhdGggZD0iTTQ3IDY4IFE1MCA3MiA1MyA2OCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==" style="width:48px;height:48px;border-radius:50%;border:2px solid var(--purple);object-fit:cover;">
+          <span class="p-name">You</span>
+          <span class="p-score sc-you" id="m-score-you">0</span>
+        </div>
         <span class="vs-txt">VS</span>
-        <div class="player"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gZWFycyAtLT4KICA8Y2lyY2xlIGN4PSIyOCIgY3k9IjMyIiByPSIxMyIgZmlsbD0iIzIyMiIvPgogIDxjaXJjbGUgY3g9IjcyIiBjeT0iMzIiIHI9IjEzIiBmaWxsPSIjMjIyIi8+CiAgPCEtLSBoZWFkIC0tPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTgiIHI9IjI2IiBmaWxsPSIjZjBmMGYwIi8+CiAgPCEtLSBleWUgcGF0Y2hlcyAtLT4KICA8ZWxsaXBzZSBjeD0iMzgiIGN5PSI1NCIgcng9IjkiIHJ5PSI4IiBmaWxsPSIjMjIyIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTAgMzggNTQpIi8+CiAgPGVsbGlwc2UgY3g9IjYyIiBjeT0iNTQiIHJ4PSI5IiByeT0iOCIgZmlsbD0iIzIyMiIgdHJhbnNmb3JtPSJyb3RhdGUoMTAgNjIgNTQpIi8+CiAgPCEtLSBleWVzIC0tPgogIDxjaXJjbGUgY3g9IjM4IiBjeT0iNTQiIHI9IjQiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iNjIiIGN5PSI1NCIgcj0iNCIgZmlsbD0id2hpdGUiLz4KICA8Y2lyY2xlIGN4PSIzOSIgY3k9IjUzIiByPSIyLjUiIGZpbGw9IiMxMTEiLz4KICA8Y2lyY2xlIGN4PSI2MyIgY3k9IjUzIiByPSIyLjUiIGZpbGw9IiMxMTEiLz4KICA8Y2lyY2xlIGN4PSI0MCIgY3k9IjUyIiByPSIxIiBmaWxsPSJ3aGl0ZSIvPgogIDxjaXJjbGUgY3g9IjY0IiBjeT0iNTIiIHI9IjEiIGZpbGw9IndoaXRlIi8+CiAgPCEtLSBtdXp6bGUgLS0+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjgiIHJ4PSIxMSIgcnk9IjgiIGZpbGw9IiNkZGQiLz4KICA8IS0tIG5vc2UgLS0+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjUiIHJ4PSI0IiByeT0iMyIgZmlsbD0iIzMzMyIvPgogIDwhLS0gbW91dGggLS0+CiAgPHBhdGggZD0iTTQ3IDY4IFE1MCA3MiA1MyA2OCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==" style="width:48px;height:48px;border-radius:50%;border:2px solid var(--teal);object-fit:cover;"><span class="p-name">MindMaster</span><span class="p-score sc-opp">5</span></div>
+        <div class="player">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gZWFycyAtLT4KICA8Y2lyY2xlIGN4PSIyOCIgY3k9IjMyIiByPSIxMyIgZmlsbD0iIzIyMiIvPgogIDxjaXJjbGUgY3g9IjcyIiBjeT0iMzIiIHI9IjEzIiBmaWxsPSIjMjIyIi8+CiAgPCEtLSBoZWFkIC0tPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTgiIHI9IjI2IiBmaWxsPSIjZjBmMGYwIi8+CiAgPCEtLSBleWUgcGF0Y2hlcyAtLT4KICA8ZWxsaXBzZSBjeD0iMzgiIGN5PSI1NCIgcng9IjkiIHJ5PSI4IiBmaWxsPSIjMjIyIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTAgMzggNTQpIi8+CiAgPGVsbGlwc2UgY3g9IjYyIiBjeT0iNTQiIHJ4PSI5IiByeT0iOCIgZmlsbD0iIzIyMiIgdHJhbnNmb3JtPSJyb3RhdGUoMTAgNjIgNTQpIi8+CiAgPCEtLSBleWVzIC0tPgogIDxjaXJjbGUgY3g9IjM4IiBjeT0iNTQiIHI9IjQiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iNjIiIGN5PSI1NCIgcj0iNCIgZmlsbD0id2hpdGUiLz4KICA8Y2lyY2xlIGN4PSIzOSIgY3k9IjUzIiByPSIyLjUiIGZpbGw9IiMxMTEiLz4KICA8Y2lyY2xlIGN4PSI2MyIgY3k9IjUzIiByPSIyLjUiIGZpbGw9IiMxMTEiLz4KICA8Y2lyY2xlIGN4PSI0MCIgY3k9IjUyIiByPSIxIiBmaWxsPSJ3aGl0ZSIvPgogIDxjaXJjbGUgY3g9IjY0IiBjeT0iNTIiIHI9IjEiIGZpbGw9IndoaXRlIi8+CiAgPCEtLSBtdXp6bGUgLS0+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjgiIHJ4PSIxMSIgcnk9IjgiIGZpbGw9IiNkZGQiLz4KICA8IS0tIG5vc2UgLS0+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjUiIHJ4PSI0IiByeT0iMyIgZmlsbD0iIzMzMyIvPgogIDwhLS0gbW91dGggLS0+CiAgPHBhdGggZD0iTTQ3IDY4IFE1MCA3MiA1MyA2OCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==" style="width:48px;height:48px;border-radius:50%;border:2px solid var(--teal);object-fit:cover;">
+          <span class="p-name">MindMaster</span>
+          <span class="p-score sc-opp" id="m-score-opp">0</span>
+        </div>
       </div>
-      <div class="q-box">What is the largest planet in our solar system?</div>
-      <div class="ans-grid">
-        <button class="ans" onclick="this.className='ans wrong'">Saturn</button>
-        <button class="ans correct">✓ Jupiter</button>
-        <button class="ans" onclick="this.className='ans wrong'">Neptune</button>
-        <button class="ans" onclick="this.className='ans wrong'">Uranus</button>
-      </div>
+      <div class="q-box" id="m-question">Get ready...</div>
+      <div class="ans-grid" id="m-answers"></div>
     </div>
+
+    <!-- ANIMATED LEADERBOARD -->
     <div class="lb-card">
-      <div class="lb-head"><span class="lb-ttl">Global Leaderboard</span><span class="lb-week">This Week</span></div>
-      <div class="lb-row"><span class="lb-r r1">1</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gZWFycyAtLT4KICA8cG9seWdvbiBwb2ludHM9IjIyLDQyIDMyLDE4IDQyLDQyIiBmaWxsPSIjRTg2MTFBIi8+CiAgPHBvbHlnb24gcG9pbnRzPSI1OCw0MiA2OCwxOCA3OCw0MiIgZmlsbD0iI0U4NjExQSIvPgogIDxwb2x5Z29uIHBvaW50cz0iMjYsNDAgMzIsMjQgMzgsNDAiIGZpbGw9IiNGNUE2MjMiLz4KICA8cG9seWdvbiBwb2ludHM9IjYyLDQwIDY4LDI0IDc0LDQwIiBmaWxsPSIjRjVBNjIzIi8+CiAgPCEtLSBoZWFkIC0tPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjU4IiByeD0iMjYiIHJ5PSIyMiIgZmlsbD0iI0U4NjExQSIvPgogIDwhLS0gbXV6emxlIC0tPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjY4IiByeD0iMTQiIHJ5PSIxMCIgZmlsbD0iI0Y1RDBBMCIvPgogIDwhLS0gZXllcyAtLT4KICA8Y2lyY2xlIGN4PSI0MCIgY3k9IjU0IiByPSI1IiBmaWxsPSIjMWExZjM1Ii8+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSI1NCIgcj0iNSIgZmlsbD0iIzFhMWYzNSIvPgogIDxjaXJjbGUgY3g9IjQxIiBjeT0iNTMiIHI9IjIiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iNjEiIGN5PSI1MyIgcj0iMiIgZmlsbD0id2hpdGUiLz4KICA8IS0tIG5vc2UgLS0+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjYiIHJ4PSIzIiByeT0iMiIgZmlsbD0iIzMzMyIvPgogIDwhLS0gbW91dGggLS0+CiAgPHBhdGggZD0iTTQ3IDY4IFE1MCA3MiA1MyA2OCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid var(--orange);"><div class="lb-info"><div class="lb-nm">AceKid_92</div><div class="lb-dt">Memory · Speed</div></div><span class="lb-sc" style="color:var(--orange);">14,820</span><div class="lb-chg up">▲3</div></div>
-      <div class="lb-row"><span class="lb-r r2">2</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gZWFycyAtLT4KICA8Y2lyY2xlIGN4PSIyOCIgY3k9IjMyIiByPSIxMyIgZmlsbD0iIzIyMiIvPgogIDxjaXJjbGUgY3g9IjcyIiBjeT0iMzIiIHI9IjEzIiBmaWxsPSIjMjIyIi8+CiAgPCEtLSBoZWFkIC0tPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTgiIHI9IjI2IiBmaWxsPSIjZjBmMGYwIi8+CiAgPCEtLSBleWUgcGF0Y2hlcyAtLT4KICA8ZWxsaXBzZSBjeD0iMzgiIGN5PSI1NCIgcng9IjkiIHJ5PSI4IiBmaWxsPSIjMjIyIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTAgMzggNTQpIi8+CiAgPGVsbGlwc2UgY3g9IjYyIiBjeT0iNTQiIHJ4PSI5IiByeT0iOCIgZmlsbD0iIzIyMiIgdHJhbnNmb3JtPSJyb3RhdGUoMTAgNjIgNTQpIi8+CiAgPCEtLSBleWVzIC0tPgogIDxjaXJjbGUgY3g9IjM4IiBjeT0iNTQiIHI9IjQiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iNjIiIGN5PSI1NCIgcj0iNCIgZmlsbD0id2hpdGUiLz4KICA8Y2lyY2xlIGN4PSIzOSIgY3k9IjUzIiByPSIyLjUiIGZpbGw9IiMxMTEiLz4KICA8Y2lyY2xlIGN4PSI2MyIgY3k9IjUzIiByPSIyLjUiIGZpbGw9IiMxMTEiLz4KICA8Y2lyY2xlIGN4PSI0MCIgY3k9IjUyIiByPSIxIiBmaWxsPSJ3aGl0ZSIvPgogIDxjaXJjbGUgY3g9IjY0IiBjeT0iNTIiIHI9IjEiIGZpbGw9IndoaXRlIi8+CiAgPCEtLSBtdXp6bGUgLS0+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjgiIHJ4PSIxMSIgcnk9IjgiIGZpbGw9IiNkZGQiLz4KICA8IS0tIG5vc2UgLS0+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjUiIHJ4PSI0IiByeT0iMyIgZmlsbD0iIzMzMyIvPgogIDwhLS0gbW91dGggLS0+CiAgPHBhdGggZD0iTTQ3IDY4IFE1MCA3MiA1MyA2OCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid #ccc;"><div class="lb-info"><div class="lb-nm">MindMaster</div><div class="lb-dt">Language · Logic</div></div><span class="lb-sc">13,440</span><div class="lb-chg dn">▼1</div></div>
-      <div class="lb-row"><span class="lb-r r3">3</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gbWFuZSAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjU1IiByPSIzMCIgZmlsbD0iI0M4ODYwQSIvPgogIDwhLS0gZmFjZSAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUyIiByPSIyMiIgZmlsbD0iI0Y1Qzg0MiIvPgogIDwhLS0gZWFycyAtLT4KICA8Y2lyY2xlIGN4PSIzMCIgY3k9IjM0IiByPSI4IiBmaWxsPSIjRjVDODQyIi8+CiAgPGNpcmNsZSBjeD0iNzAiIGN5PSIzNCIgcj0iOCIgZmlsbD0iI0Y1Qzg0MiIvPgogIDxjaXJjbGUgY3g9IjMwIiBjeT0iMzQiIHI9IjQiIGZpbGw9IiNFOEEwMjAiLz4KICA8Y2lyY2xlIGN4PSI3MCIgY3k9IjM0IiByPSI0IiBmaWxsPSIjRThBMDIwIi8+CiAgPCEtLSBleWVzIC0tPgogIDxjaXJjbGUgY3g9IjQxIiBjeT0iNTAiIHI9IjUiIGZpbGw9IiM3QjU4MDAiLz4KICA8Y2lyY2xlIGN4PSI1OSIgY3k9IjUwIiByPSI1IiBmaWxsPSIjN0I1ODAwIi8+CiAgPGNpcmNsZSBjeD0iNDEiIGN5PSI1MCIgcj0iMyIgZmlsbD0iIzExMSIvPgogIDxjaXJjbGUgY3g9IjU5IiBjeT0iNTAiIHI9IjMiIGZpbGw9IiMxMTEiLz4KICA8Y2lyY2xlIGN4PSI0MiIgY3k9IjQ5IiByPSIxLjIiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSI0OSIgcj0iMS4yIiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gbXV6emxlIC0tPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjYyIiByeD0iMTEiIHJ5PSI4IiBmaWxsPSIjRjBEMDYwIi8+CiAgPCEtLSBub3NlIC0tPgogIDxwYXRoIGQ9Ik00NSA1OSBMNTAgNjIgTDU1IDU5IFE1MCA1NiA0NSA1OSBaIiBmaWxsPSIjQzA2MDNBIi8+CiAgPCEtLSBtb3V0aCAtLT4KICA8cGF0aCBkPSJNNDcgNjMgUTUwIDY3IDUzIDYzIiBzdHJva2U9IiNDMDYwM0EiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid #CD7F32;"><div class="lb-info"><div class="lb-nm">BrainStorm</div><div class="lb-dt">Speed · Logic</div></div><span class="lb-sc">11,200</span><div class="lb-chg up">▲2</div></div>
-      <div class="lb-row"><span class="lb-r" style="color:var(--text-mute);">4</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gdXBwZXIgd2luZ3MgLS0+CiAgPGVsbGlwc2UgY3g9IjMyIiBjeT0iNDIiIHJ4PSIyMCIgcnk9IjE2IiBmaWxsPSIjRTg2MTJBIiB0cmFuc2Zvcm09InJvdGF0ZSgtMjAgMzIgNDIpIi8+CiAgPGVsbGlwc2UgY3g9IjY4IiBjeT0iNDIiIHJ4PSIyMCIgcnk9IjE2IiBmaWxsPSIjRTg2MTJBIiB0cmFuc2Zvcm09InJvdGF0ZSgyMCA2OCA0MikiLz4KICA8IS0tIGxvd2VyIHdpbmdzIC0tPgogIDxlbGxpcHNlIGN4PSIzMiIgY3k9IjYyIiByeD0iMTQiIHJ5PSIxMCIgZmlsbD0iI0Y1QTAyMCIgdHJhbnNmb3JtPSJyb3RhdGUoMjAgMzIgNjIpIi8+CiAgPGVsbGlwc2UgY3g9IjY4IiBjeT0iNjIiIHJ4PSIxNCIgcnk9IjEwIiBmaWxsPSIjRjVBMDIwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMjAgNjggNjIpIi8+CiAgPCEtLSB3aW5nIHNwb3RzIC0tPgogIDxjaXJjbGUgY3g9IjMyIiBjeT0iNDAiIHI9IjUiIGZpbGw9IiMxMTEiIG9wYWNpdHk9IjAuNCIvPgogIDxjaXJjbGUgY3g9IjY4IiBjeT0iNDAiIHI9IjUiIGZpbGw9IiMxMTEiIG9wYWNpdHk9IjAuNCIvPgogIDwhLS0gYm9keSAtLT4KICA8ZWxsaXBzZSBjeD0iNTAiIGN5PSI1MiIgcng9IjQiIHJ5PSIxNiIgZmlsbD0iIzMzMyIvPgogIDwhLS0gaGVhZCAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjM1IiByPSI1IiBmaWxsPSIjMzMzIi8+CiAgPCEtLSBhbnRlbm5hZSAtLT4KICA8bGluZSB4MT0iNDgiIHkxPSIzMSIgeDI9IjQwIiB5Mj0iMjIiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8bGluZSB4MT0iNTIiIHkxPSIzMSIgeDI9IjYwIiB5Mj0iMjIiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8Y2lyY2xlIGN4PSI0MCIgY3k9IjIyIiByPSIyIiBmaWxsPSIjRjVBMDIwIi8+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSIyMiIgcj0iMiIgZmlsbD0iI0Y1QTAyMCIvPgo8L3N2Zz4=" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid var(--purple);"><div class="lb-info"><div class="lb-nm">NeuralNova</div><div class="lb-dt">Memory · Language</div></div><span class="lb-sc">9,870</span><div class="lb-chg up">▲5</div></div>
-      <div class="lb-row lb-you"><span class="lb-r" style="color:var(--purple);">7</span><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gZ2xvdyAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIyOCIgZmlsbD0iI0ZGRDcwMCIgb3BhY2l0eT0iMC4xNSIvPgogIDwhLS0gc3RhciBzaGFwZSAtLT4KICA8cG9seWdvbiBwb2ludHM9IjUwLDE4IDU3LDM4IDc4LDM4IDYyLDUyIDY4LDcyIDUwLDYwIDMyLDcyIDM4LDUyIDIyLDM4IDQzLDM4IiBmaWxsPSIjRkZENzAwIi8+CiAgPCEtLSBpbm5lciBzdGFyIC0tPgogIDxwb2x5Z29uIHBvaW50cz0iNTAsMjYgNTUsNDAgNzAsNDAgNTgsNTAgNjMsNjQgNTAsNTYgMzcsNjQgNDIsNTAgMzAsNDAgNDUsNDAiIGZpbGw9IiNGRkU5NEQiLz4KICA8IS0tIHNwYXJrbGVzIC0tPgogIDxjaXJjbGUgY3g9Ijc0IiBjeT0iMjYiIHI9IjMiIGZpbGw9IiNGRkU5NEQiLz4KICA8Y2lyY2xlIGN4PSI3OCIgY3k9IjM0IiByPSIyIiBmaWxsPSIjRkZENzAwIi8+CiAgPGNpcmNsZSBjeD0iMjYiIGN5PSIzMCIgcj0iMi41IiBmaWxsPSIjRkZFOTREIi8+Cjwvc3ZnPg==" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid var(--purple);"><div class="lb-info"><div class="lb-nm" style="color:var(--purple);">You</div><div class="lb-dt">Keep climbing!</div></div><span class="lb-sc" style="color:var(--purple);">7,220</span><div class="lb-chg up">▲1</div></div>
+      <div class="lb-head">
+        <span class="lb-ttl">Global Leaderboard</span>
+        <span class="lb-week">LIVE</span>
+      </div>
+      <div id="lb-rows"></div>
+      <div class="lb-row lb-you">
+        <span class="lb-r" style="color:var(--purple);">7</span>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gZ2xvdyAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIyOCIgZmlsbD0iI0ZGRDcwMCIgb3BhY2l0eT0iMC4xNSIvPgogIDwhLS0gc3RhciBzaGFwZSAtLT4KICA8cG9seWdvbiBwb2ludHM9IjUwLDE4IDU3LDM4IDc4LDM4IDYyLDUyIDY4LDcyIDUwLDYwIDMyLDcyIDM4LDUyIDIyLDM4IDQzLDM4IiBmaWxsPSIjRkZENzAwIi8+CiAgPCEtLSBpbm5lciBzdGFyIC0tPgogIDxwb2x5Z29uIHBvaW50cz0iNTAsMjYgNTUsNDAgNzAsNDAgNTgsNTAgNjMsNjQgNTAsNTYgMzcsNjQgNDIsNTAgMzAsNDAgNDUsNDAiIGZpbGw9IiNGRkU5NEQiLz4KICA8IS0tIHNwYXJrbGVzIC0tPgogIDxjaXJjbGUgY3g9Ijc0IiBjeT0iMjYiIHI9IjMiIGZpbGw9IiNGRkU5NEQiLz4KICA8Y2lyY2xlIGN4PSI3OCIgY3k9IjM0IiByPSIyIiBmaWxsPSIjRkZENzAwIi8+CiAgPGNpcmNsZSBjeD0iMjYiIGN5PSIzMCIgcj0iMi41IiBmaWxsPSIjRkZFOTREIi8+Cjwvc3ZnPg==" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid var(--purple);">
+        <div class="lb-info"><div class="lb-nm" style="color:var(--purple);">You</div><div class="lb-dt">Keep climbing!</div></div>
+        <span class="lb-sc" style="color:var(--purple);">7,220</span>
+        <div class="lb-chg up">▲1</div>
+      </div>
     </div>
+
   </div>
 </section>
 
-<section class="challenges">
+<!-- CHALLENGES"challenges">
   <div class="section-label" style="color:var(--yellow);">Challenges</div>
   <h2 class="section-title">A game for <span class="hl-yellow">every mind.</span></h2>
   <p class="section-sub" style="margin-bottom:28px;">8 challenge types. Every one a different way to get sharper.</p>
@@ -377,6 +394,125 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
   open.style.transition='opacity 0.06s ease';
   closed.style.transition='opacity 0.06s ease';
   setTimeout(blink, 2000);
+})();
+</script>
+<script>
+// ── LIVE MATCH ANIMATION ──
+(function(){
+  var questions = [
+    { q:"What is the largest planet in our solar system?", answers:["Saturn","Jupiter","Neptune","Uranus"], correct:1 },
+    { q:"How many sides does a hexagon have?", answers:["5","6","7","8"], correct:1 },
+    { q:"What language is spoken in Brazil?", answers:["Spanish","French","Portuguese","Italian"], correct:2 },
+    { q:"What is 12 × 12?", answers:["124","144","132","148"], correct:1 },
+    { q:"Which planet is closest to the Sun?", answers:["Venus","Earth","Mars","Mercury"], correct:3 },
+    { q:"What is the capital of Japan?", answers:["Seoul","Beijing","Tokyo","Bangkok"], correct:2 },
+    { q:"How many bones are in the human body?", answers:["196","206","216","226"], correct:1 },
+    { q:"What gas do plants absorb?", answers:["Oxygen","Nitrogen","CO2","Helium"], correct:2 },
+    { q:"Who painted the Mona Lisa?", answers:["Picasso","Monet","Da Vinci","Raphael"], correct:2 },
+    { q:"What is the fastest land animal?", answers:["Lion","Horse","Cheetah","Leopard"], correct:2 },
+  ];
+
+  var round = 0, youScore = 0, oppScore = 0, total = questions.length;
+  var qEl = document.getElementById('m-question');
+  var aEl = document.getElementById('m-answers');
+  var rEl = document.getElementById('m-round');
+  var pEl = document.getElementById('m-prog');
+  var yEl = document.getElementById('m-score-you');
+  var oEl = document.getElementById('m-score-opp');
+
+  function showRound() {
+    if (round >= total) { round = 0; youScore = 0; oppScore = 0; }
+    var q = questions[round];
+    rEl.textContent = 'Round ' + (round+1) + ' / ' + total;
+    pEl.style.width = ((round+1)/total*100) + '%';
+    qEl.textContent = q.q;
+    aEl.innerHTML = '';
+    q.answers.forEach(function(a, i) {
+      var btn = document.createElement('button');
+      btn.className = 'ans';
+      btn.textContent = a;
+      btn.disabled = true;
+      aEl.appendChild(btn);
+    });
+
+    // After 1.8s — show opponent answering (wrong)
+    setTimeout(function() {
+      var oppWrong = (q.correct + 1 + Math.floor(Math.random()*2)) % 4;
+      if (oppWrong === q.correct) oppWrong = (oppWrong+1) % 4;
+      aEl.children[oppWrong].classList.add('wrong');
+    }, 1800);
+
+    // After 2.4s — show correct answer, update scores
+    setTimeout(function() {
+      aEl.children[q.correct].textContent = '✓ ' + q.answers[q.correct];
+      aEl.children[q.correct].classList.add('correct');
+      // You always get it right, opp sometimes does too
+      youScore++;
+      if (Math.random() > 0.45) oppScore++;
+      yEl.textContent = youScore;
+      oEl.textContent = oppScore;
+    }, 2400);
+
+    // After 3.8s — next round
+    setTimeout(function() {
+      round++;
+      showRound();
+    }, 3800);
+  }
+
+  setTimeout(showRound, 600);
+})();
+
+// ── LIVE LEADERBOARD ANIMATION ──
+(function(){
+  var players = [
+    { name:'AceKid_92',  detail:'Memory · Speed',    score:14820, img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gZWFycyAtLT4KICA8cG9seWdvbiBwb2ludHM9IjIyLDQyIDMyLDE4IDQyLDQyIiBmaWxsPSIjRTg2MTFBIi8+CiAgPHBvbHlnb24gcG9pbnRzPSI1OCw0MiA2OCwxOCA3OCw0MiIgZmlsbD0iI0U4NjExQSIvPgogIDxwb2x5Z29uIHBvaW50cz0iMjYsNDAgMzIsMjQgMzgsNDAiIGZpbGw9IiNGNUE2MjMiLz4KICA8cG9seWdvbiBwb2ludHM9IjYyLDQwIDY4LDI0IDc0LDQwIiBmaWxsPSIjRjVBNjIzIi8+CiAgPCEtLSBoZWFkIC0tPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjU4IiByeD0iMjYiIHJ5PSIyMiIgZmlsbD0iI0U4NjExQSIvPgogIDwhLS0gbXV6emxlIC0tPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjY4IiByeD0iMTQiIHJ5PSIxMCIgZmlsbD0iI0Y1RDBBMCIvPgogIDwhLS0gZXllcyAtLT4KICA8Y2lyY2xlIGN4PSI0MCIgY3k9IjU0IiByPSI1IiBmaWxsPSIjMWExZjM1Ii8+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSI1NCIgcj0iNSIgZmlsbD0iIzFhMWYzNSIvPgogIDxjaXJjbGUgY3g9IjQxIiBjeT0iNTMiIHI9IjIiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iNjEiIGN5PSI1MyIgcj0iMiIgZmlsbD0id2hpdGUiLz4KICA8IS0tIG5vc2UgLS0+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjYiIHJ4PSIzIiByeT0iMiIgZmlsbD0iIzMzMyIvPgogIDwhLS0gbW91dGggLS0+CiAgPHBhdGggZD0iTTQ3IDY4IFE1MCA3MiA1MyA2OCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==',       border:'var(--orange)', rankClass:'r1' },
+    { name:'MindMaster', detail:'Language · Logic',   score:13440, img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gZWFycyAtLT4KICA8Y2lyY2xlIGN4PSIyOCIgY3k9IjMyIiByPSIxMyIgZmlsbD0iIzIyMiIvPgogIDxjaXJjbGUgY3g9IjcyIiBjeT0iMzIiIHI9IjEzIiBmaWxsPSIjMjIyIi8+CiAgPCEtLSBoZWFkIC0tPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTgiIHI9IjI2IiBmaWxsPSIjZjBmMGYwIi8+CiAgPCEtLSBleWUgcGF0Y2hlcyAtLT4KICA8ZWxsaXBzZSBjeD0iMzgiIGN5PSI1NCIgcng9IjkiIHJ5PSI4IiBmaWxsPSIjMjIyIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTAgMzggNTQpIi8+CiAgPGVsbGlwc2UgY3g9IjYyIiBjeT0iNTQiIHJ4PSI5IiByeT0iOCIgZmlsbD0iIzIyMiIgdHJhbnNmb3JtPSJyb3RhdGUoMTAgNjIgNTQpIi8+CiAgPCEtLSBleWVzIC0tPgogIDxjaXJjbGUgY3g9IjM4IiBjeT0iNTQiIHI9IjQiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iNjIiIGN5PSI1NCIgcj0iNCIgZmlsbD0id2hpdGUiLz4KICA8Y2lyY2xlIGN4PSIzOSIgY3k9IjUzIiByPSIyLjUiIGZpbGw9IiMxMTEiLz4KICA8Y2lyY2xlIGN4PSI2MyIgY3k9IjUzIiByPSIyLjUiIGZpbGw9IiMxMTEiLz4KICA8Y2lyY2xlIGN4PSI0MCIgY3k9IjUyIiByPSIxIiBmaWxsPSJ3aGl0ZSIvPgogIDxjaXJjbGUgY3g9IjY0IiBjeT0iNTIiIHI9IjEiIGZpbGw9IndoaXRlIi8+CiAgPCEtLSBtdXp6bGUgLS0+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjgiIHJ4PSIxMSIgcnk9IjgiIGZpbGw9IiNkZGQiLz4KICA8IS0tIG5vc2UgLS0+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjUiIHJ4PSI0IiByeT0iMyIgZmlsbD0iIzMzMyIvPgogIDwhLS0gbW91dGggLS0+CiAgPHBhdGggZD0iTTQ3IDY4IFE1MCA3MiA1MyA2OCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==',     border:'#ccc',          rankClass:'r2' },
+    { name:'BrainStorm', detail:'Speed · Logic',      score:11200, img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gbWFuZSAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjU1IiByPSIzMCIgZmlsbD0iI0M4ODYwQSIvPgogIDwhLS0gZmFjZSAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUyIiByPSIyMiIgZmlsbD0iI0Y1Qzg0MiIvPgogIDwhLS0gZWFycyAtLT4KICA8Y2lyY2xlIGN4PSIzMCIgY3k9IjM0IiByPSI4IiBmaWxsPSIjRjVDODQyIi8+CiAgPGNpcmNsZSBjeD0iNzAiIGN5PSIzNCIgcj0iOCIgZmlsbD0iI0Y1Qzg0MiIvPgogIDxjaXJjbGUgY3g9IjMwIiBjeT0iMzQiIHI9IjQiIGZpbGw9IiNFOEEwMjAiLz4KICA8Y2lyY2xlIGN4PSI3MCIgY3k9IjM0IiByPSI0IiBmaWxsPSIjRThBMDIwIi8+CiAgPCEtLSBleWVzIC0tPgogIDxjaXJjbGUgY3g9IjQxIiBjeT0iNTAiIHI9IjUiIGZpbGw9IiM3QjU4MDAiLz4KICA8Y2lyY2xlIGN4PSI1OSIgY3k9IjUwIiByPSI1IiBmaWxsPSIjN0I1ODAwIi8+CiAgPGNpcmNsZSBjeD0iNDEiIGN5PSI1MCIgcj0iMyIgZmlsbD0iIzExMSIvPgogIDxjaXJjbGUgY3g9IjU5IiBjeT0iNTAiIHI9IjMiIGZpbGw9IiMxMTEiLz4KICA8Y2lyY2xlIGN4PSI0MiIgY3k9IjQ5IiByPSIxLjIiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSI0OSIgcj0iMS4yIiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gbXV6emxlIC0tPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjYyIiByeD0iMTEiIHJ5PSI4IiBmaWxsPSIjRjBEMDYwIi8+CiAgPCEtLSBub3NlIC0tPgogIDxwYXRoIGQ9Ik00NSA1OSBMNTAgNjIgTDU1IDU5IFE1MCA1NiA0NSA1OSBaIiBmaWxsPSIjQzA2MDNBIi8+CiAgPCEtLSBtb3V0aCAtLT4KICA8cGF0aCBkPSJNNDcgNjMgUTUwIDY3IDUzIDYzIiBzdHJva2U9IiNDMDYwM0EiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+',      border:'#CD7F32',       rankClass:'r3' },
+    { name:'NeuralNova', detail:'Memory · Language',  score:9870,  img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gdXBwZXIgd2luZ3MgLS0+CiAgPGVsbGlwc2UgY3g9IjMyIiBjeT0iNDIiIHJ4PSIyMCIgcnk9IjE2IiBmaWxsPSIjRTg2MTJBIiB0cmFuc2Zvcm09InJvdGF0ZSgtMjAgMzIgNDIpIi8+CiAgPGVsbGlwc2UgY3g9IjY4IiBjeT0iNDIiIHJ4PSIyMCIgcnk9IjE2IiBmaWxsPSIjRTg2MTJBIiB0cmFuc2Zvcm09InJvdGF0ZSgyMCA2OCA0MikiLz4KICA8IS0tIGxvd2VyIHdpbmdzIC0tPgogIDxlbGxpcHNlIGN4PSIzMiIgY3k9IjYyIiByeD0iMTQiIHJ5PSIxMCIgZmlsbD0iI0Y1QTAyMCIgdHJhbnNmb3JtPSJyb3RhdGUoMjAgMzIgNjIpIi8+CiAgPGVsbGlwc2UgY3g9IjY4IiBjeT0iNjIiIHJ4PSIxNCIgcnk9IjEwIiBmaWxsPSIjRjVBMDIwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMjAgNjggNjIpIi8+CiAgPCEtLSB3aW5nIHNwb3RzIC0tPgogIDxjaXJjbGUgY3g9IjMyIiBjeT0iNDAiIHI9IjUiIGZpbGw9IiMxMTEiIG9wYWNpdHk9IjAuNCIvPgogIDxjaXJjbGUgY3g9IjY4IiBjeT0iNDAiIHI9IjUiIGZpbGw9IiMxMTEiIG9wYWNpdHk9IjAuNCIvPgogIDwhLS0gYm9keSAtLT4KICA8ZWxsaXBzZSBjeD0iNTAiIGN5PSI1MiIgcng9IjQiIHJ5PSIxNiIgZmlsbD0iIzMzMyIvPgogIDwhLS0gaGVhZCAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjM1IiByPSI1IiBmaWxsPSIjMzMzIi8+CiAgPCEtLSBhbnRlbm5hZSAtLT4KICA8bGluZSB4MT0iNDgiIHkxPSIzMSIgeDI9IjQwIiB5Mj0iMjIiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8bGluZSB4MT0iNTIiIHkxPSIzMSIgeDI9IjYwIiB5Mj0iMjIiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8Y2lyY2xlIGN4PSI0MCIgY3k9IjIyIiByPSIyIiBmaWxsPSIjRjVBMDIwIi8+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSIyMiIgcj0iMiIgZmlsbD0iI0Y1QTAyMCIvPgo8L3N2Zz4=', border:'rgba(155,93,229,0.6)', rankClass:'' },
+  ];
+
+  var rankColors = ['var(--orange)','#C0C0C0','#CD7F32','rgba(255,255,255,0.25)'];
+  var rankClasses = ['r1','r2','r3',''];
+
+  function renderLB() {
+    var container = document.getElementById('lb-rows');
+    if (!container) return;
+    // Sort by score descending
+    var sorted = players.slice().sort(function(a,b){ return b.score - a.score; });
+    container.innerHTML = sorted.map(function(p, i) {
+      var change = p.score > p.prevScore ? '▲' + Math.floor((p.score-p.prevScore)/10) : (p.score < p.prevScore ? '▼' + Math.floor((p.prevScore-p.score)/10) : '–');
+      var changeClass = p.score > (p.prevScore||p.score) ? 'up' : (p.score < (p.prevScore||p.score) ? 'dn' : 'up');
+      var rankNum = i+1;
+      var rankColor = rankColors[i] || 'rgba(255,255,255,0.25)';
+      return '<div class="lb-row" style="transition:all 0.5s ease;">' +
+        '<span class="lb-r" style="color:' + rankColor + ';">' + rankNum + '</span>' +
+        '<img src="' + p.img + '" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid ' + p.border + ';">' +
+        '<div class="lb-info"><div class="lb-nm">' + p.name + '</div><div class="lb-dt">' + p.detail + '</div></div>' +
+        '<span class="lb-sc" style="color:' + rankColor + ';">' + p.score.toLocaleString() + '</span>' +
+        '<div class="lb-chg ' + changeClass + '">' + change + '</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  function updateScores() {
+    // Fluctuate top 3 scores to jostle for position
+    players.forEach(function(p, i) {
+      p.prevScore = p.score;
+      if (i < 3) {
+        // top 3 fluctuate more aggressively
+        var delta = Math.floor(Math.random() * 180) - 60;
+        p.score = Math.max(10000, p.score + delta);
+      } else {
+        var delta = Math.floor(Math.random() * 60) - 20;
+        p.score = Math.max(8000, p.score + delta);
+      }
+    });
+    renderLB();
+  }
+
+  renderLB();
+  setInterval(updateScores, 2200);
 })();
 </script>
 </body>

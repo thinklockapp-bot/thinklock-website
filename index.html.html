@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ThinkLock — Think Faster. Play Smarter. Win More.</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#000;--card:#0D1320;--teal:#1DB8A0;--teal-bright:#22D3EE;
+  --purple:#9B5DE5;--magenta:#EC4899;--orange:#FF8A3D;--yellow:#FFB52E;
+  --green:#22c55e;--text:#fff;--text-dim:rgba(255,255,255,0.6);
+  --text-mute:rgba(255,255,255,0.25);--border:rgba(255,255,255,0.07);
+}
+html,body{background:var(--black);color:var(--text);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(0,0,0,0.92);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);position:sticky;top:0;z-index:200;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-icon{width:38px;height:38px;border-radius:10px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#000;}
+.brand-name{font-size:20px;font-weight:900;letter-spacing:-.5px;}
+.nav-links{display:none;}
+@media(min-width:700px){.nav-links{display:flex;gap:24px;list-style:none;}.nav-links a{color:var(--text-dim);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;}.nav-links a:hover{color:var(--teal);}}
+.nav-btn{padding:9px 18px;border-radius:50px;background:var(--teal);color:#000;font-weight:800;font-size:13px;border:none;cursor:pointer;}
+
+.hero{position:relative;overflow:hidden;padding:56px 20px 0;display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--black);}
+.glow-t{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(29,184,160,0.13) 0%,transparent 60%);pointer-events:none;}
+.glow-p{position:absolute;top:200px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(155,93,229,0.1) 0%,transparent 65%);pointer-events:none;}
+.dot-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.live-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.35);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:800;color:var(--magenta);letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px;position:relative;z-index:2;}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--magenta);animation:blink 1.2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.headline{font-size:clamp(40px,10vw,80px);font-weight:900;line-height:1.0;letter-spacing:-2.5px;margin-bottom:20px;position:relative;z-index:2;}
+.hl-teal{color:var(--teal-bright);}.hl-orange{color:var(--orange);}.hl-magenta{color:var(--magenta);}.hl-yellow{color:var(--yellow);}
+.sub{font-size:clamp(15px,2.5vw,17px);color:var(--text-dim);line-height:1.7;max-width:480px;margin:0 auto 36px;position:relative;z-index:2;}
+
+.soma-stage{position:relative;z-index:2;width:220px;height:220px;margin:0 auto 0;display:flex;align-items:center;justify-content:center;}
+.soma-halo{position:absolute;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,0.18) 0%,transparent 70%);animation:halo 3.5s ease-in-out infinite;}
+@keyframes halo{0%,100%{transform:scale(1);opacity:.7;}50%{transform:scale(1.12);opacity:1;}}
+.soma-img-hero{width:190px;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 10px 30px rgba(34,211,238,0.2));position:relative;z-index:3;object-fit:contain;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);}}
+
+.store-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0 48px;position:relative;z-index:2;}
+.store-btn{display:flex;align-items:center;gap:10px;padding:12px 20px;border-radius:14px;text-decoration:none;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}
+.store-white{background:#fff;color:#000;}.store-white:hover{background:#dff9f6;transform:translateY(-2px);}
+.store-soon{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.3);border:1.5px solid rgba(255,255,255,0.08);cursor:not-allowed;position:relative;}
+.soon-badge{position:absolute;top:-9px;right:-6px;background:var(--orange);color:#000;font-size:9px;font-weight:900;padding:2px 7px;border-radius:50px;white-space:nowrap;}
+.sbt{display:flex;flex-direction:column;text-align:left;}
+.sbt-s{font-size:10px;opacity:.5;font-weight:500;}.sbt-b{font-size:15px;font-weight:800;letter-spacing:-.3px;}
+
+.section-label{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;text-align:center;}
+.section-title{font-size:clamp(26px,5vw,42px);font-weight:900;letter-spacing:-1px;text-align:center;margin-bottom:6px;}
+.section-sub{font-size:14px;color:var(--text-dim);text-align:center;margin-bottom:36px;}
+
+.brain-band{width:100%;background:linear-gradient(180deg,#000 0%,#0A0F1E 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 20px;}
+.brain-row{display:flex;flex-direction:column;gap:16px;max-width:640px;margin:0 auto;}
+@media(min-width:640px){.brain-row{flex-direction:row;}}
+.brain-score-card{flex:1;background:var(--card);border:1px solid rgba(155,93,229,0.3);border-radius:20px;padding:28px 24px;text-align:center;position:relative;overflow:hidden;}
+.brain-score-card::before{content:'';position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:200px;height:200px;background:radial-gradient(circle,rgba(155,93,229,0.2) 0%,transparent 65%);pointer-events:none;}
+.bs-label{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--purple);text-transform:uppercase;margin-bottom:12px;}
+.bs-number{font-size:96px;font-weight:900;letter-spacing:-4px;color:#fff;line-height:1;margin-bottom:8px;}
+.bs-sub{font-size:12px;font-weight:700;color:var(--text-dim);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;}
+.bs-bar-wrap{background:rgba(255,255,255,0.08);border-radius:50px;height:6px;overflow:hidden;}
+.bs-bar{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--purple),var(--teal-bright));width:9%;animation:bsbar 1.8s ease-out forwards;}
+@keyframes bsbar{from{width:0;}to{width:9%;}}
+.bs-bar-label{font-size:11px;color:var(--text-mute);margin-top:6px;}
+.brain-regions{flex:1;display:flex;flex-direction:column;gap:10px;justify-content:center;}
+.region-row{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;}
+.region-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.region-name{font-size:15px;font-weight:700;}.region-pct{font-size:14px;font-weight:800;}
+.region-bar{background:rgba(255,255,255,0.07);border-radius:50px;height:5px;overflow:hidden;}
+.region-fill{height:100%;border-radius:50px;animation:rfill 1.5s ease-out forwards;}
+@keyframes rfill{from{width:0%;}}
+
+.compete{background:#000;padding:56px 20px;}
+.cards-split{display:flex;flex-direction:column;gap:16px;max-width:680px;margin:0 auto;}
+@media(min-width:640px){.cards-split{flex-direction:row;}}
+.match-card{flex:1;background:var(--card);border:1px solid rgba(236,72,153,0.25);border-radius:20px;padding:20px;}
+.match-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.live-pill{display:flex;align-items:center;gap:5px;background:rgba(236,72,153,0.12);border:1px solid rgba(236,72,153,0.3);border-radius:50px;padding:4px 10px;font-size:11px;font-weight:800;color:var(--magenta);letter-spacing:.08em;}
+.round-txt{font-size:12px;color:var(--text-dim);font-weight:600;}
+.prog-bar{background:rgba(255,255,255,0.07);height:3px;border-radius:3px;margin-bottom:20px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--magenta),var(--purple));width:60%;}
+.vs-area{display:flex;align-items:center;justify-content:space-around;margin-bottom:18px;}
+.player{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;}
+.av-you{background:rgba(155,93,229,0.2);border:2px solid var(--purple);color:var(--purple);}
+.av-opp{background:rgba(29,184,160,0.15);border:2px solid var(--teal);color:var(--teal);}
+.p-name{font-size:12px;color:var(--text-dim);font-weight:600;}
+.p-score{font-size:34px;font-weight:900;line-height:1;}
+.sc-you{color:var(--purple);}.sc-opp{color:var(--teal);}
+.vs-txt{font-size:13px;font-weight:800;color:var(--text-mute);letter-spacing:1px;}
+.q-box{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;font-size:14px;font-weight:600;line-height:1.5;margin-bottom:12px;}
+.ans-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ans{padding:10px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--text);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;}
+.ans:hover{border-color:var(--teal);color:var(--teal);background:rgba(34,211,238,0.07);}
+.ans.correct{border-color:var(--green);background:rgba(34,197,94,0.1);color:var(--green);}
+.ans.wrong{border-color:var(--magenta);background:rgba(236,72,153,0.08);color:var(--magenta);}
+.lb-card{flex:1;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px;}
+.lb-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.lb-ttl{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);}
+.lb-week{font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.06em;}
+.lb-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);}
+.lb-row:last-child{border:none;}
+.lb-r{width:20px;font-size:12px;font-weight:800;color:var(--text-dim);text-align:center;flex-shrink:0;}
+.r1{color:var(--orange);}.r2{color:#C0C0C0;}.r3{color:#CD7F32;}
+.lb-av{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;}
+.lb-info{flex:1;}.lb-nm{font-size:13px;font-weight:700;}.lb-dt{font-size:11px;color:var(--text-dim);margin-top:1px;}
+.lb-sc{font-size:13px;font-weight:800;color:var(--teal);flex-shrink:0;}
+.lb-chg{font-size:10px;font-weight:700;padding:2px 6px;border-radius:6px;flex-shrink:0;}
+.up{background:rgba(34,197,94,0.12);color:var(--green);}.dn{background:rgba(236,72,153,0.1);color:var(--magenta);}
+.lb-you{background:rgba(155,93,229,0.08);border-radius:10px;border:1px solid rgba(155,93,229,0.2)!important;padding:9px 8px!important;margin:3px -4px;}
+
+.challenges{background:#000;padding:56px 20px;border-top:1px solid var(--border);}
+.ch-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:680px;margin:0 auto;}
+@media(min-width:540px){.ch-grid{grid-template-columns:repeat(4,1fr);}}
+.ch-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:border-color .2s,transform .2s;display:flex;flex-direction:column;}
+.ch-card:hover{border-color:var(--teal-bright);transform:translateY(-4px);}
+.ch-img-wrap{width:100%;aspect-ratio:1;background:#0A1018;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.ch-img-wrap img{width:100%;height:100%;object-fit:contain;}
+.ch-info{padding:12px 12px 14px;}
+.ch-name{font-size:14px;font-weight:800;margin-bottom:3px;}
+.ch-desc{font-size:11px;color:var(--text-dim);line-height:1.4;}
+
+.cta{background:linear-gradient(180deg,#000 0%,#0A0F1E 100%);padding:64px 20px 72px;text-align:center;border-top:1px solid var(--border);position:relative;overflow:hidden;}
+.cta::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(29,184,160,0.12) 0%,transparent 65%);pointer-events:none;}
+.cta-soma{width:140px;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 8px 20px rgba(34,211,238,0.25));margin:0 auto 24px;display:block;position:relative;z-index:2;object-fit:contain;}
+.cta h2{font-size:clamp(32px,7vw,56px);font-weight:900;letter-spacing:-1.5px;margin-bottom:12px;position:relative;z-index:2;}
+.cta p{font-size:15px;color:var(--text-dim);margin-bottom:32px;max-width:380px;margin-left:auto;margin-right:auto;position:relative;z-index:2;}
+
+footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px;}
+.footer-inner{max-width:680px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center;}
+.footer-brand{display:flex;align-items:center;gap:10px;}
+.footer-logo{width:34px;height:34px;border-radius:9px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#000;}
+.footer-name{font-size:18px;font-weight:900;letter-spacing:-.5px;}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;}
+.footer-links a{color:var(--text-dim);text-decoration:none;font-size:14px;font-weight:500;}
+.footer-links a:hover{color:var(--teal);}
+.footer-store{display:flex;align-items:center;gap:10px;padding:10px 20px;border-radius:12px;background:#fff;color:#000;text-decoration:none;font-family:inherit;border:none;cursor:pointer;}
+.footer-divider{width:100%;height:1px;background:var(--border);}
+.footer-support{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;}
+.support-link{color:var(--text-mute);text-decoration:none;font-size:13px;font-weight:500;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:1px;cursor:pointer;transition:color .2s;}
+.support-link:hover{color:var(--teal);}
+.footer-copy{font-size:12px;color:var(--text-mute);}
+
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal{background:#0D1320;border:1px solid rgba(29,184,160,0.25);border-radius:20px;padding:32px 28px;max-width:480px;width:100%;position:relative;max-height:80vh;overflow-y:auto;}
+.modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.08);border:none;color:var(--text-dim);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
+.modal h2{font-size:22px;font-weight:900;margin-bottom:8px;letter-spacing:-.5px;}
+.modal-badge{display:inline-block;background:rgba(29,184,160,0.12);border:1px solid rgba(29,184,160,0.25);color:var(--teal);font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px;}
+.modal p{font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:14px;}
+.modal-divider{height:1px;background:var(--border);margin:20px 0;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">
+    <div class="brand-icon">
+      <img src="/assets/thinklock_logo.png" alt="ThinkLock" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" onerror="this.style.display='none';this.parentElement.innerHTML='TL';">
+    </div>
+    <span class="brand-name">ThinkLock</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Compete</a></li>
+    <li><a href="#">Challenges</a></li>
+    <li><a href="#">Leaderboard</a></li>
+    <li><a href="#">Pricing</a></li>
+  </ul>
+  <button class="nav-btn">Get the app</button>
+</nav>
+
+<section class="hero">
+  <div class="dot-bg"></div>
+  <div class="glow-t"></div><div class="glow-p"></div>
+  <div class="live-badge"><div class="live-dot"></div>Live matches happening now</div>
+  <h1 class="headline">Think faster.<br><span class="hl-teal">Play smarter.</span><br><span class="hl-orange">Win more.</span></h1>
+  <p class="sub">The competitive brain training app. Take on real players in live 1v1 matches, climb the global leaderboard, and track your Brain Score across every category.</p>
+
+  <div class="soma-stage">
+    <div class="soma-halo"></div>
+    <img src="/assets/Soma_Website_Main.png" alt="Soma" class="soma-img-hero">
+  </div>
+
+  <div class="store-row">
+    <a href="#" class="store-btn store-white">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#000"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <div class="sbt"><span class="sbt-s">Download on the</span><span class="sbt-b">App Store</span></div>
+    </a>
+    <div class="store-btn store-soon">
+      <span class="soon-badge">Coming Soon</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,0.2)"><path d="M3.18 23.76c.31.17.67.19 1.01.07L15.5 12 4.19.17C3.85.05 3.49.07 3.18.24 2.56.58 2.25 1.29 2.25 2.25v19.5c0 .96.31 1.67.93 2.01z"/></svg>
+      <div class="sbt"><span class="sbt-s">Coming soon to</span><span class="sbt-b">Google Play</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="brain-band">
+  <div class="section-label">Brain Score</div>
+  <h2 class="section-title">The number that <span class="hl-teal">hooks you.</span></h2>
+  <p class="section-sub">Track performance across every region of your mind — in real time.</p>
+  <div class="brain-row">
+    <div class="brain-score-card">
+      <div class="bs-label">Your brain today</div>
+      <div class="bs-number">819</div>
+      <div class="bs-sub">Brain Score · Level 8</div>
+      <div class="bs-bar-wrap"><div class="bs-bar"></div></div>
+      <div class="bs-bar-label">19 / 200 XP to Level 9</div>
+    </div>
+    <div class="brain-regions">
+      <div class="region-row"><div class="region-top"><span class="region-name" style="color:var(--orange);">Memory</span><span class="region-pct" style="color:var(--orange);">83%</span></div><div class="region-bar"><div class="region-fill" style="width:83%;background:var(--orange);"></div></div></div>
+      <div class="region-row"><div class="region-top"><span class="region-name" style="color:var(--teal);">Logic</span><span class="region-pct" style="color:var(--teal);">82%</span></div><div class="region-bar"><div class="region-fill" style="width:82%;background:var(--teal);"></div></div></div>
+      <div class="region-row"><div class="region-top"><span class="region-name" style="color:var(--purple);">Language</span><span class="region-pct" style="color:var(--purple);">82%</span></div><div class="region-bar"><div class="region-fill" style="width:82%;background:var(--purple);"></div></div></div>
+      <div class="region-row" style="border:1px solid rgba(236,72,153,0.3);"><div class="region-top"><span class="region-name" style="color:var(--magenta);">Speed</span><span style="font-size:10px;color:var(--magenta);font-style:italic;">needs attention</span><span class="region-pct" style="color:var(--magenta);">72%</span></div><div class="region-bar"><div class="region-fill" style="width:72%;background:var(--magenta);"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="compete">
+  <div class="section-label" style="color:var(--magenta);">Compete</div>
+  <h2 class="section-title">Make it <span class="hl-magenta">social.</span> Make it <span class="hl-magenta">live.</span></h2>
+  <p class="section-sub" style="margin-bottom:28px;">Real-time 1v1 matches and a global leaderboard updated every second.</p>
+  <div class="cards-split">
+    <div class="match-card">
+      <div class="match-header"><div class="live-pill"><div class="live-dot"></div>LIVE</div><span class="round-txt">Round 6 / 10</span></div>
+      <div class="prog-bar"><div class="prog-fill"></div></div>
+      <div class="vs-area">
+        <div class="player"><div class="avatar av-you">Y</div><span class="p-name">You</span><span class="p-score sc-you">6</span></div>
+        <span class="vs-txt">VS</span>
+        <div class="player"><div class="avatar av-opp">M</div><span class="p-name">MindMaster</span><span class="p-score sc-opp">5</span></div>
+      </div>
+      <div class="q-box">What is the largest planet in our solar system?</div>
+      <div class="ans-grid">
+        <button class="ans" onclick="this.className='ans wrong'">Saturn</button>
+        <button class="ans correct">✓ Jupiter</button>
+        <button class="ans" onclick="this.className='ans wrong'">Neptune</button>
+        <button class="ans" onclick="this.className='ans wrong'">Uranus</button>
+      </div>
+    </div>
+    <div class="lb-card">
+      <div class="lb-head"><span class="lb-ttl">Global Leaderboard</span><span class="lb-week">This Week</span></div>
+      <div class="lb-row"><span class="lb-r r1">1</span><div class="lb-av" style="background:rgba(255,138,61,0.15);color:var(--orange);">A</div><div class="lb-info"><div class="lb-nm">AceKid_92</div><div class="lb-dt">Memory · Speed</div></div><span class="lb-sc" style="color:var(--orange);">14,820</span><div class="lb-chg up">▲3</div></div>
+      <div class="lb-row"><span class="lb-r r2">2</span><div class="lb-av" style="background:rgba(255,255,255,0.07);color:#ccc;">M</div><div class="lb-info"><div class="lb-nm">MindMaster</div><div class="lb-dt">Language · Logic</div></div><span class="lb-sc">13,440</span><div class="lb-chg dn">▼1</div></div>
+      <div class="lb-row"><span class="lb-r r3">3</span><div class="lb-av" style="background:rgba(34,211,238,0.1);color:var(--teal);">B</div><div class="lb-info"><div class="lb-nm">BrainStorm</div><div class="lb-dt">Speed · Logic</div></div><span class="lb-sc">11,200</span><div class="lb-chg up">▲2</div></div>
+      <div class="lb-row"><span class="lb-r" style="color:var(--text-mute);">4</span><div class="lb-av" style="background:rgba(155,93,229,0.1);color:var(--purple);">N</div><div class="lb-info"><div class="lb-nm">NeuralNova</div><div class="lb-dt">Memory · Language</div></div><span class="lb-sc">9,870</span><div class="lb-chg up">▲5</div></div>
+      <div class="lb-row lb-you"><span class="lb-r" style="color:var(--purple);">7</span><div class="lb-av" style="background:rgba(155,93,229,0.2);color:var(--purple);">★</div><div class="lb-info"><div class="lb-nm" style="color:var(--purple);">You</div><div class="lb-dt">Keep climbing!</div></div><span class="lb-sc" style="color:var(--purple);">7,220</span><div class="lb-chg up">▲1</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="challenges">
+  <div class="section-label" style="color:var(--yellow);">Challenges</div>
+  <h2 class="section-title">A game for <span class="hl-yellow">every mind.</span></h2>
+  <p class="section-sub" style="margin-bottom:28px;">8 challenge types. Every one a different way to get sharper.</p>
+  <div class="ch-grid">
+    <div class="ch-card"><div class="ch-img-wrap"><img src="/assets/game_word_scramble.png" alt="Word Scramble"></div><div class="ch-info"><div class="ch-name" style="color:var(--teal);">Word Scramble</div><div class="ch-desc">Unscramble words</div></div></div>
+    <div class="ch-card"><div class="ch-img-wrap"><img src="/assets/game_mindpop.png" alt="MindPop"></div><div class="ch-info"><div class="ch-name" style="color:var(--magenta);">MindPop</div><div class="ch-desc">Test your knowledge</div></div></div>
+    <div class="ch-card"><div class="ch-img-wrap"><img src="/assets/game_speed_solver.png" alt="Speed Solver"></div><div class="ch-info"><div class="ch-name" style="color:var(--orange);">Speed Solver</div><div class="ch-desc">Race the clock</div></div></div>
+    <div class="ch-card"><div class="ch-img-wrap"><img src="/assets/game_memory_match.png" alt="Memory Match"></div><div class="ch-info"><div class="ch-name" style="color:var(--purple);">Memory Match</div><div class="ch-desc">Find matching pairs</div></div></div>
+    <div class="ch-card"><div class="ch-img-wrap"><img src="/assets/game_language_learn.png" alt="Language Learn"></div><div class="ch-info"><div class="ch-name" style="color:var(--teal);">Language Learn</div><div class="ch-desc">Translate words</div></div></div>
+    <div class="ch-card"><div class="ch-img-wrap"><img src="/assets/game_logic_lite.png" alt="Logic Lite"></div><div class="ch-info"><div class="ch-name" style="color:var(--yellow);">Logic Lite</div><div class="ch-desc">Solve logic puzzles</div></div></div>
+    <div class="ch-card"><div class="ch-img-wrap"><img src="/assets/game_shape_sorter.png" alt="Shape Sorter"></div><div class="ch-info"><div class="ch-name" style="color:var(--green);">Shape Sorter</div><div class="ch-desc">Sort it and score</div></div></div>
+    <div class="ch-card"><div class="ch-img-wrap"><img src="/assets/game_tap_trap.png" alt="Tap Trap"></div><div class="ch-info"><div class="ch-name" style="color:var(--magenta);">Tap Trap</div><div class="ch-desc">Tap fast and score</div></div></div>
+  </div>
+</section>
+
+<section class="cta">
+  <img src="/assets/soma_trophy.png" alt="Soma celebrating" class="cta-soma">
+  <h2>Ready to <span class="hl-teal">compete?</span></h2>
+  <p>Download ThinkLock and find out where your brain really stands.</p>
+  <div class="store-row" style="position:relative;z-index:2;">
+    <a href="#" class="store-btn store-white">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#000"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <div class="sbt"><span class="sbt-s">Download on the</span><span class="sbt-b">App Store</span></div>
+    </a>
+    <div class="store-btn store-soon">
+      <span class="soon-badge">Coming Soon</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,0.2)"><path d="M3.18 23.76c.31.17.67.19 1.01.07L15.5 12 4.19.17C3.85.05 3.49.07 3.18.24 2.56.58 2.25 1.29 2.25 2.25v19.5c0 .96.31 1.67.93 2.01z"/></svg>
+      <div class="sbt"><span class="sbt-s">Coming soon to</span><span class="sbt-b">Google Play</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">TL</div>
+      <span class="footer-name">ThinkLock</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">Compete</a>
+      <a href="#">Challenges</a>
+      <a href="#">Leaderboard</a>
+      <a href="#">Pricing</a>
+    </div>
+    <a href="#" class="footer-store">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#000"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <div class="sbt"><span class="sbt-s" style="color:#555;">Download on the</span><span class="sbt-b" style="font-size:14px;">App Store</span></div>
+    </a>
+    <div class="footer-divider"></div>
+    <div class="footer-support">
+      <span class="support-link" onclick="document.getElementById('privacy-modal').classList.add('open')">Privacy Policy</span>
+      <span class="support-link" onclick="document.getElementById('delete-modal').classList.add('open')">Delete Account</span>
+    </div>
+    <div class="footer-copy">© 2025 ThinkLock. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="privacy-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('privacy-modal').classList.remove('open')">✕</button>
+    <h2>Privacy Policy</h2>
+    <div class="modal-badge">Coming soon</div>
+    <p>Our full Privacy Policy is being finalized and will be published here shortly.</p>
+    <p>ThinkLock is committed to protecting your privacy and handling your data responsibly. This page will outline exactly what data we collect, how we use it, and your rights as a user.</p>
+    <div class="modal-divider"></div>
+    <p style="color:var(--text-mute);font-size:13px;">Questions? Reach out through the app.</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="delete-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('delete-modal').classList.remove('open')">✕</button>
+    <h2>Delete Account</h2>
+    <div class="modal-badge" style="background:rgba(236,72,153,0.1);border-color:rgba(236,72,153,0.25);color:var(--magenta);">Permanent action</div>
+    <p>Step-by-step account deletion instructions are coming soon.</p>
+    <p>Deleting your account permanently removes your Brain Score, streak history, leaderboard rankings, and avatar customizations.</p>
+    <div class="modal-divider"></div>
+    <p style="color:var(--text-mute);font-size:13px;">Need help now? Contact us through the app and we'll handle it manually.</p>
+  </div>
+</div>
+
+</body>
+</html>

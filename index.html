@@ -516,48 +516,63 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
 })();
 </script>
 <script>
-// ── BRAIN SCORE ANIMATION — scroll triggered ──
+// ── BRAIN SCORE ANIMATION — scroll triggered, staggered ──
 (function(){
   var scoreEl  = document.getElementById('brain-score-num');
   var barEl    = document.getElementById('bs-xp-bar');
   var labelEl  = document.getElementById('bs-xp-label');
   var section  = document.querySelector('.brain-band');
+  var started  = false;
 
   var scoreStart = 799, scoreEnd = 829;
-  var xpBarStart = 40, xpBarEnd = 80;   // percent of bar width
-  var xpNumStart = 80, xpNumEnd = 160;  // out of 200
-  var duration = 3500;
-  var started = false;
+  var xpBarStart = 0,   xpBarEnd = 75;    // 0% to 75% of bar
+  var xpNumStart = 0,   xpNumEnd = 150;   // 0 to 150 out of 200
+  var scoreDur   = 3500;
+  var xpDur      = 3000;
+  var xpDelay    = 3600; // starts just after score finishes
 
   // Set initial state
   scoreEl.textContent  = scoreStart;
-  barEl.style.width    = xpBarStart + '%';
-  labelEl.textContent  = xpNumStart + ' / 200 XP to Level 9';
+  barEl.style.width    = '0%';
+  labelEl.textContent  = '0 / 200 XP to Level 9';
 
-  function easeOut(t){ return 1 - Math.pow(1-t,3); }
+  function easeOut(t){ return 1 - Math.pow(1-t, 3); }
+  function easeInOut(t){ return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
 
-  function animate(startTime, ts){
-    var elapsed  = ts - startTime;
-    var progress = Math.min(elapsed / duration, 1);
-    var eased    = easeOut(progress);
+  function runScore(){
+    var t0 = null;
+    function step(ts){
+      if(!t0) t0 = ts;
+      var p = Math.min((ts-t0)/scoreDur, 1);
+      scoreEl.textContent = Math.round(scoreStart + (scoreEnd-scoreStart)*easeOut(p));
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
 
-    scoreEl.textContent  = Math.round(scoreStart + (scoreEnd - scoreStart) * eased);
-    barEl.style.width    = (xpBarStart + (xpBarEnd - xpBarStart) * eased) + '%';
-    labelEl.textContent  = Math.round(xpNumStart + (xpNumEnd - xpNumStart) * eased) + ' / 200 XP to Level 9';
-
-    if(progress < 1) requestAnimationFrame(function(ts){ animate(startTime, ts); });
+  function runXP(){
+    var t0 = null;
+    function step(ts){
+      if(!t0) t0 = ts;
+      var p = Math.min((ts-t0)/xpDur, 1);
+      var e = easeInOut(p);
+      barEl.style.width   = (xpBarStart + (xpBarEnd-xpBarStart)*e) + '%';
+      labelEl.textContent = Math.round(xpNumStart + (xpNumEnd-xpNumStart)*e) + ' / 200 XP to Level 9';
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
   }
 
   function startAnim(){
     if(started) return;
     started = true;
-    requestAnimationFrame(function(ts){ animate(ts, ts); });
+    runScore();
+    setTimeout(runXP, xpDelay);
   }
 
-  // Trigger when brain section scrolls into view
   var observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting) startAnim();
+    entries.forEach(function(e){
+      if(e.isIntersecting) startAnim();
     });
   }, { threshold: 0.3 });
 

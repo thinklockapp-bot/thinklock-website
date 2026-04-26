@@ -544,9 +544,10 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
       if(!t0) t0 = ts;
       var p = Math.min((ts - t0) / duration, 1);
       var e = easeOut(p);
+      var eBar = Math.min(p * 2, 1); eBar = easeOut(eBar);
       scoreEl.textContent  = Math.round(scoreStart + (scoreEnd - scoreStart) * e);
-      barEl.style.width    = (xpBarEnd * e) + '%';
-      labelEl.textContent  = Math.round(xpNumEnd * e) + ' / 200 XP to Level 9';
+      barEl.style.width    = (xpBarEnd * eBar) + '%';
+      labelEl.textContent  = Math.round(xpNumEnd * eBar) + ' / 200 XP to Level 9';
       if(p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);

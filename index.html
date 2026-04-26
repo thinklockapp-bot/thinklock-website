@@ -251,7 +251,7 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
       <div class="vs-area">
         <div class="player">
           <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzFhMWYzNSIvPgogIDwhLS0gZWFycyAtLT4KICA8cG9seWdvbiBwb2ludHM9IjIyLDQyIDMyLDE4IDQyLDQyIiBmaWxsPSIjRTg2MTFBIi8+CiAgPHBvbHlnb24gcG9pbnRzPSI1OCw0MiA2OCwxOCA3OCw0MiIgZmlsbD0iI0U4NjExQSIvPgogIDxwb2x5Z29uIHBvaW50cz0iMjYsNDAgMzIsMjQgMzgsNDAiIGZpbGw9IiNGNUE2MjMiLz4KICA8cG9seWdvbiBwb2ludHM9IjYyLDQwIDY4LDI0IDc0LDQwIiBmaWxsPSIjRjVBNjIzIi8+CiAgPCEtLSBoZWFkIC0tPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjU4IiByeD0iMjYiIHJ5PSIyMiIgZmlsbD0iI0U4NjExQSIvPgogIDwhLS0gbXV6emxlIC0tPgogIDxlbGxpcHNlIGN4PSI1MCIgY3k9IjY4IiByeD0iMTQiIHJ5PSIxMCIgZmlsbD0iI0Y1RDBBMCIvPgogIDwhLS0gZXllcyAtLT4KICA8Y2lyY2xlIGN4PSI0MCIgY3k9IjU0IiByPSI1IiBmaWxsPSIjMWExZjM1Ii8+CiAgPGNpcmNsZSBjeD0iNjAiIGN5PSI1NCIgcj0iNSIgZmlsbD0iIzFhMWYzNSIvPgogIDxjaXJjbGUgY3g9IjQxIiBjeT0iNTMiIHI9IjIiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iNjEiIGN5PSI1MyIgcj0iMiIgZmlsbD0id2hpdGUiLz4KICA8IS0tIG5vc2UgLS0+CiAgPGVsbGlwc2UgY3g9IjUwIiBjeT0iNjYiIHJ4PSIzIiByeT0iMiIgZmlsbD0iIzMzMyIvPgogIDwhLS0gbW91dGggLS0+CiAgPHBhdGggZD0iTTQ3IDY4IFE1MCA3MiA1MyA2OCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==" style="width:48px;height:48px;border-radius:50%;border:2px solid var(--purple);object-fit:cover;">
-          <span class="p-name">You</span>
+          <span class="p-name">BrainKing</span>
           <span class="p-score sc-you" id="m-score-you">0</span>
         </div>
         <span class="vs-txt">VS</span>
@@ -428,10 +428,10 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
     qEl.textContent = q.q;
     aEl.innerHTML = '';
     q.answers.forEach(function(a, i) {
-      var btn = document.createElement('button');
+      var btn = document.createElement('div');
       btn.className = 'ans';
       btn.textContent = a;
-      btn.disabled = true;
+      btn.style.cursor = 'default';
       aEl.appendChild(btn);
     });
 

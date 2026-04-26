@@ -411,11 +411,30 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
   <div class="modal">
     <button class="modal-close" onclick="document.getElementById('delete-modal').classList.remove('open')">✕</button>
     <h2>Delete Account</h2>
-    <div class="modal-badge" style="background:rgba(236,72,153,0.1);border-color:rgba(236,72,153,0.25);color:var(--magenta);">Permanent action</div>
-    <p>Step-by-step account deletion instructions are coming soon.</p>
-    <p>Deleting your account permanently removes your Brain Score, streak history, leaderboard rankings, and avatar customizations.</p>
+    <div class="modal-badge" style="background:rgba(236,72,153,0.1);border-color:rgba(236,72,153,0.25);color:var(--magenta);">Permanent Action</div>
+
+    <div style="background:rgba(236,72,153,0.08);border:1px solid rgba(236,72,153,0.3);border-radius:12px;padding:14px 16px;margin-bottom:16px;">
+      <p style="color:var(--magenta);font-weight:700;">⚠️ IMPORTANT</p>
+      <p style="margin-top:6px;">Deleting your account will permanently remove all your game progress, statistics, friends, and achievements. This action cannot be undone.</p>
+    </div>
+
+    <p><strong style="color:var(--magenta);">What Gets Deleted</strong></p>
+    <p>• All game scores and statistics<br>
+    • AI level progress and achievements<br>
+    • Friend connections and leaderboard rankings<br>
+    • Profile information and preferences<br>
+    • Account login credentials</p>
+
     <div class="modal-divider"></div>
-    <p style="color:var(--text-mute);font-size:13px;">Need help now? Contact us through the app and we'll handle it manually.</p>
+
+    <p><strong style="color:var(--magenta);">To delete your account:</strong></p>
+    <p style="margin-top:8px;">
+      <span style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;"><span style="background:rgba(236,72,153,0.2);color:var(--magenta);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;">1</span><span>Open the ThinkLock app</span></span>
+      <span style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;"><span style="background:rgba(236,72,153,0.2);color:var(--magenta);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;">2</span><span>Go to <strong>Settings</strong></span></span>
+      <span style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;"><span style="background:rgba(236,72,153,0.2);color:var(--magenta);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;">3</span><span>Select <strong>Delete Account</strong></span></span>
+      <span style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;"><span style="background:rgba(236,72,153,0.2);color:var(--magenta);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;">4</span><span>Select <strong>YES</strong></span></span>
+      <span style="display:flex;align-items:flex-start;gap:10px;"><span style="background:rgba(236,72,153,0.2);color:var(--magenta);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;">5</span><span>This cannot be undone — be certain you want to delete your account and all data associated with your account, stats, achievements, etc. before pressing <strong>YES</strong></span></span>
+    </p>
   </div>
 </div>
 

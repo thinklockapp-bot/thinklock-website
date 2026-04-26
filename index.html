@@ -516,20 +516,18 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
 })();
 </script>
 <script>
-// ── BRAIN SCORE ANIMATION — scroll triggered, staggered ──
+// ── BRAIN SCORE ANIMATION — all together, scroll triggered ──
 (function(){
-  var scoreEl  = document.getElementById('brain-score-num');
-  var barEl    = document.getElementById('bs-xp-bar');
-  var labelEl  = document.getElementById('bs-xp-label');
-  var section  = document.querySelector('.brain-band');
-  var started  = false;
+  var scoreEl = document.getElementById('brain-score-num');
+  var barEl   = document.getElementById('bs-xp-bar');
+  var labelEl = document.getElementById('bs-xp-label');
+  var section = document.querySelector('.brain-band');
+  var started = false;
 
   var scoreStart = 799, scoreEnd = 829;
-  var xpBarStart = 0,   xpBarEnd = 75;    // 0% to 75% of bar
-  var xpNumStart = 0,   xpNumEnd = 150;   // 0 to 150 out of 200
-  var scoreDur   = 3500;
-  var xpDur      = 3000;
-  var xpDelay    = 3600; // starts just after score finishes
+  var xpBarEnd   = 75;
+  var xpNumEnd   = 150;
+  var duration   = 3500;
 
   // Set initial state
   scoreEl.textContent  = scoreStart;
@@ -537,37 +535,21 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
   labelEl.textContent  = '0 / 200 XP to Level 9';
 
   function easeOut(t){ return 1 - Math.pow(1-t, 3); }
-  function easeInOut(t){ return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
-
-  function runScore(){
-    var t0 = null;
-    function step(ts){
-      if(!t0) t0 = ts;
-      var p = Math.min((ts-t0)/scoreDur, 1);
-      scoreEl.textContent = Math.round(scoreStart + (scoreEnd-scoreStart)*easeOut(p));
-      if(p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  function runXP(){
-    var t0 = null;
-    function step(ts){
-      if(!t0) t0 = ts;
-      var p = Math.min((ts-t0)/xpDur, 1);
-      var e = easeInOut(p);
-      barEl.style.width   = (xpBarStart + (xpBarEnd-xpBarStart)*e) + '%';
-      labelEl.textContent = Math.round(xpNumStart + (xpNumEnd-xpNumStart)*e) + ' / 200 XP to Level 9';
-      if(p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
 
   function startAnim(){
     if(started) return;
     started = true;
-    runScore();
-    setTimeout(runXP, xpDelay);
+    var t0 = null;
+    function step(ts){
+      if(!t0) t0 = ts;
+      var p = Math.min((ts - t0) / duration, 1);
+      var e = easeOut(p);
+      scoreEl.textContent  = Math.round(scoreStart + (scoreEnd - scoreStart) * e);
+      barEl.style.width    = (xpBarEnd * e) + '%';
+      labelEl.textContent  = Math.round(xpNumEnd * e) + ' / 200 XP to Level 9';
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
   }
 
   var observer = new IntersectionObserver(function(entries){

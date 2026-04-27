@@ -9,7 +9,7 @@
 :root{
   --black:#000;--card:#0D1320;--teal:#1DB8A0;--teal-bright:#22D3EE;
   --purple:#9B5DE5;--magenta:#EC4899;--orange:#FF8A3D;--yellow:#FFB52E;
-  --green:#22c55e;--text:#fff;--text-dim:rgba(255,255,255,0.6);
+  --green:#22c55e;--tl-teal:#3BB497;--tl-purple:#6D00FF;--text:#fff;--text-dim:rgba(255,255,255,0.6);
   --text-mute:rgba(255,255,255,0.25);--border:rgba(255,255,255,0.07);
 }
 html,body{background:var(--black);color:var(--text);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
@@ -20,7 +20,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 2
 .brand-name{font-size:20px;font-weight:900;letter-spacing:-.5px;}
 .nav-links{display:none;}
 @media(min-width:700px){.nav-links{display:flex;gap:24px;list-style:none;}.nav-links a{color:var(--text-dim);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;}.nav-links a:hover{color:var(--teal);}}
-.nav-btn{padding:9px 18px;border-radius:50px;background:var(--teal);color:#000;font-weight:800;font-size:13px;border:none;cursor:pointer;}
+.nav-btn{padding:9px 18px;border-radius:50px;background:var(--tl-teal);color:#fff;font-weight:800;font-size:13px;border:none;cursor:pointer;text-decoration:none;}
 
 .hero{position:relative;overflow:hidden;padding:56px 20px 0;display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--black);}
 .glow-t{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(29,184,160,0.13) 0%,transparent 60%);pointer-events:none;}
@@ -181,7 +181,7 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
   <div class="dot-bg"></div>
   <div class="glow-t"></div><div class="glow-p"></div>
   <div class="live-badge"><div class="live-dot"></div>Live matches happening now</div>
-  <h1 class="headline">Think faster.<br><span class="hl-teal">Play smarter.</span><br><span class="hl-orange">Win more.</span></h1>
+  <h1 class="headline">Think faster.<br><span style="color:var(--tl-teal);">Play smarter.</span><br><span style="color:var(--tl-purple);">Win more.</span></h1>
   <p class="sub">The competitive brain training app. Take on real players in live 1v1 matches, climb the global leaderboard, and track your Brain Score across every category.</p>
 
   <div class="soma-stage">
@@ -204,7 +204,7 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
 
 <section class="brain-band">
   <div class="section-label">Brain Score</div>
-  <h2 class="section-title">The number that <span class="hl-teal">hooks you.</span></h2>
+  <h2 class="section-title">The number that <span style="color:var(--tl-teal);">hooks you.</span></h2>
   <p class="section-sub">Track performance across every region of your mind — in real time.</p>
   <div class="brain-row">
     <div class="brain-score-card">
@@ -281,7 +281,7 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
           <img class="fc-img" src="game_word_scramble.png" alt="Word Scramble">
           <div class="fc-name" style="color:var(--teal);">Word Scramble</div>
           <div class="fc-desc">Unscramble words</div>
-          <span class="fc-tap">tap to preview</span>
+          <span class="fc-tap" style="color:var(--teal);opacity:1;">tap to preview</span>
           <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--teal);border-radius:0 0 18px 18px;opacity:0.5;"></div>
         </div>
         <div class="flip-face flip-back">
@@ -295,7 +295,7 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
           <img class="fc-img" src="game_mindpop.png" alt="MindPop">
           <div class="fc-name" style="color:var(--magenta);">MindPop</div>
           <div class="fc-desc">Test your knowledge</div>
-          <span class="fc-tap">tap to preview</span>
+          <span class="fc-tap" style="color:var(--magenta);opacity:1;">tap to preview</span>
           <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--magenta);border-radius:0 0 18px 18px;opacity:0.5;"></div>
         </div>
         <div class="flip-face flip-back">
@@ -309,7 +309,7 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
           <img class="fc-img" src="game_speed_solver.png" alt="Speed Solver">
           <div class="fc-name" style="color:var(--orange);">Speed Solver</div>
           <div class="fc-desc">Race the clock</div>
-          <span class="fc-tap">tap to preview</span>
+          <span class="fc-tap" style="color:var(--orange);opacity:1;">tap to preview</span>
           <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--orange);border-radius:0 0 18px 18px;opacity:0.5;"></div>
         </div>
         <div class="flip-face flip-back">
@@ -323,7 +323,7 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
           <img class="fc-img" src="game_memory_match.png" alt="Memory Match">
           <div class="fc-name" style="color:var(--purple);">Memory Match</div>
           <div class="fc-desc">Find matching pairs</div>
-          <span class="fc-tap">tap to preview</span>
+          <span class="fc-tap" style="color:var(--purple);opacity:1;">tap to preview</span>
           <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--purple);border-radius:0 0 18px 18px;opacity:0.5;"></div>
         </div>
         <div class="flip-face flip-back">
@@ -337,7 +337,7 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
           <img class="fc-img" src="game_language_learn.png" alt="Language Learn">
           <div class="fc-name" style="color:var(--teal);">Language Learn</div>
           <div class="fc-desc">Translate words</div>
-          <span class="fc-tap">tap to preview</span>
+          <span class="fc-tap" style="color:var(--teal);opacity:1;">tap to preview</span>
           <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--teal);border-radius:0 0 18px 18px;opacity:0.5;"></div>
         </div>
         <div class="flip-face flip-back">
@@ -351,7 +351,7 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
           <img class="fc-img" src="game_logic_lite.png" alt="Logic Lite">
           <div class="fc-name" style="color:var(--yellow);">Logic Lite</div>
           <div class="fc-desc">Solve logic puzzles</div>
-          <span class="fc-tap">tap to preview</span>
+          <span class="fc-tap" style="color:var(--yellow);opacity:1;">tap to preview</span>
           <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--yellow);border-radius:0 0 18px 18px;opacity:0.5;"></div>
         </div>
         <div class="flip-face flip-back">
@@ -365,7 +365,7 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
           <img class="fc-img" src="game_shape_sorter.png" alt="Shape Sorter">
           <div class="fc-name" style="color:var(--green);">Shape Sorter</div>
           <div class="fc-desc">Sort it and score</div>
-          <span class="fc-tap">tap to preview</span>
+          <span class="fc-tap" style="color:var(--green);opacity:1;">tap to preview</span>
           <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--green);border-radius:0 0 18px 18px;opacity:0.5;"></div>
         </div>
         <div class="flip-face flip-back">
@@ -379,7 +379,7 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
           <img class="fc-img" src="game_tap_trap.png" alt="Tap Trap">
           <div class="fc-name" style="color:var(--magenta);">Tap Trap</div>
           <div class="fc-desc">Tap fast and score</div>
-          <span class="fc-tap">tap to preview</span>
+          <span class="fc-tap" style="color:var(--magenta);opacity:1;">tap to preview</span>
           <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--magenta);border-radius:0 0 18px 18px;opacity:0.5;"></div>
         </div>
         <div class="flip-face flip-back">
@@ -392,7 +392,7 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
 
 <section class="cta">
   <img src="happy_soma.png" alt="Soma celebrating" class="cta-soma">
-  <h2>Ready to <span class="hl-teal">compete?</span></h2>
+  <h2>Ready to <span style="color:var(--tl-teal);">compete?</span></h2>
   <p>Download ThinkLock and find out where your brain really stands.</p>
   <div class="store-row" style="position:relative;z-index:2;">
     <a href="https://apps.apple.com/us/app/thinklock/id6755414121" target="_blank" class="store-btn store-white">

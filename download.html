@@ -1,11 +1,28 @@
-<script>
-const ua = navigator.userAgent || navigator.vendor || window.opera;
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Download ThinkLock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-if (/android/i.test(ua)) {
-  window.location.href = "https://play.google.com/store/apps/details?id=com.thinklock.app";
-} else if (/iPad|iPhone|iPod/.test(ua)) {
-  window.location.href = "https://apps.apple.com/us/app/thinklock/id6755414121";
-} else {
-  window.location.href = "https://thinklock.net";
-}
-</script>
+  <script>
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+    if (/android/i.test(ua)) {
+      window.location.href = "https://play.google.com/store/apps/details?id=com.thinklock.app";
+    } else if (/iPad|iPhone|iPod/.test(ua)) {
+      window.location.href = "https://apps.apple.com/us/app/thinklock/id6755414121";
+    } else {
+      window.location.href = "https://thinklock.net";
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Redirecting to ThinkLock...</h1>
+  <p>If nothing happens, choose your store:</p>
+
+  <a href="https://apps.apple.com/us/app/thinklock/id6755414121">Download on iPhone</a>
+  <br><br>
+  <a href="https://play.google.com/store/apps/details?id=com.thinklock.app">Download on Android</a>
+</body>
+</html>

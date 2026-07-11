@@ -183,7 +183,7 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
 .available-badge{position:absolute;top:-9px;right:-6px;background:var(--green);color:#000;font-size:9px;font-weight:900;padding:2px 7px;border-radius:50px;white-space:nowrap;}
 
 /* Homepage screenshot showcase */
-.app-showcase{padding:24px 20px 18px;max-width:1200px;margin:0 auto}
+.app-showcase{padding:24px 20px 18px;max-width:1200px;margin:0 auto;overflow-x:hidden}
 .app-showcase-head{text-align:center;margin:0 auto 20px;max-width:860px}
 .app-showcase-head .section-label{margin-bottom:8px}
 .app-showcase-head .section-title{margin-bottom:12px}
@@ -196,8 +196,9 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
 .phone-screen{border-radius:24px;overflow:hidden;background:#000;width:100%;aspect-ratio:10/19.5;display:flex;align-items:center;justify-content:center}
 .phone-screen img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;object-position:center center;background:#000}
 @media(max-width:980px){
-  .phone-strip{display:flex;gap:16px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x proximity}
-  .phone-card{min-width:270px;scroll-snap-align:start}
+  .phone-strip{grid-template-columns:1fr;gap:18px;max-width:360px;margin:0 auto}
+  .phone-card{width:100%}
+  .phone-mockup{width:min(100%,340px)}
 }
 
 </style>

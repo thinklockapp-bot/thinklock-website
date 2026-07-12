@@ -201,6 +201,87 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
   .phone-mockup{width:min(100%,340px)}
 }
 
+
+/* Approved homepage skill + competition intro */
+.hero-skill-strip{
+  width:100%;
+  max-width:1120px;
+  margin:30px auto 28px;
+  padding:10px 12px 2px;
+  text-align:center;
+}
+.hero-skill-title{
+  margin:0 auto 14px;
+  font-size:clamp(42px,7vw,88px);
+  line-height:.98;
+  letter-spacing:-.055em;
+  font-weight:950;
+  color:#fff;
+}
+.hero-skill-title span,
+.hero-skill-title strong{
+  display:block;
+}
+.hero-skill-title strong{
+  font-style:normal;
+  background:linear-gradient(90deg,var(--tl-teal),#5fa8ff,var(--tl-purple));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.hero-skill-sub{
+  margin:0 auto 28px;
+  max-width:760px;
+  color:rgba(255,255,255,.72);
+  font-size:clamp(18px,2.2vw,25px);
+  line-height:1.35;
+  font-weight:650;
+}
+.skill-chip-row{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:14px;
+  margin:0 auto 16px;
+}
+.skill-chip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  min-height:58px;
+  padding:14px 24px;
+  border-radius:24px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(29,184,160,.38);
+  box-shadow:0 14px 34px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.025);
+  color:#fff;
+  font-size:clamp(16px,1.6vw,20px);
+  font-weight:850;
+  backdrop-filter:blur(10px);
+}
+.skill-chip .chip-icon{
+  color:var(--tl-teal);
+  font-size:1.25em;
+  line-height:1;
+  filter:drop-shadow(0 0 12px rgba(29,184,160,.35));
+}
+.skill-chip-purple{
+  border-color:rgba(155,93,229,.52);
+  background:rgba(155,93,229,.06);
+}
+.skill-chip-purple .chip-icon{
+  color:var(--tl-purple);
+  filter:drop-shadow(0 0 12px rgba(155,93,229,.4));
+}
+@media(max-width:700px){
+  .hero-skill-strip{margin:22px auto 24px;padding:4px 4px 0}
+  .hero-skill-title{font-size:clamp(38px,12vw,56px);line-height:1.02}
+  .hero-skill-sub{font-size:17px;margin-bottom:20px}
+  .skill-chip-row{display:grid;grid-template-columns:1fr;gap:10px;max-width:330px}
+  .skill-chip{width:100%;min-height:52px;padding:13px 18px;border-radius:20px;font-size:16px}
+}
+
 </style>
 </head>
 <body>
@@ -238,10 +319,27 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
 <div class="live-badge"><div class="live-dot"></div>Live matches happening now</div>
 <h1 class="headline">Think faster.<br/><span style="color:var(--tl-teal);">Play smarter.</span><br/><span style="color:var(--tl-purple);">Win more.</span></h1>
 
+<section class="hero-skill-strip" aria-label="ThinkLock brain training and competition features">
+  <h2 class="hero-skill-title">
+    <span>Sharpen your brain.</span>
+    <strong>Compete daily.</strong>
+  </h2>
+  <p class="hero-skill-sub">Train key skills and prove them in competition.</p>
 
-<h2 class="hero-benefit-line" style="font-size:clamp(28px,4vw,44px);line-height:1.12;max-width:980px;margin:26px auto 26px;text-align:center;font-weight:950;letter-spacing:-.035em;color:#fff;background:rgba(255,255,255,.055);border:1px solid rgba(29,184,160,.24);border-radius:26px;padding:26px 28px;box-shadow:0 18px 45px rgba(0,0,0,.22);backdrop-filter:blur(10px);">
-  Build your Brain Score daily across memory, focus, speed, logic, and problem-solving — then prove it in 1v1 matches, trivia battles, and weekly tournaments.
-</h2>
+  <div class="skill-chip-row skill-chip-row-primary">
+    <div class="skill-chip"><span class="chip-icon">🧠</span><span>Memory</span></div>
+    <div class="skill-chip"><span class="chip-icon">◎</span><span>Focus</span></div>
+    <div class="skill-chip"><span class="chip-icon">⚡</span><span>Speed</span></div>
+    <div class="skill-chip"><span class="chip-icon">🧩</span><span>Logic</span></div>
+    <div class="skill-chip"><span class="chip-icon">💡</span><span>Problem-Solving</span></div>
+  </div>
+
+  <div class="skill-chip-row skill-chip-row-secondary">
+    <div class="skill-chip skill-chip-purple"><span class="chip-icon">👥</span><span>1v1 Matches</span></div>
+    <div class="skill-chip skill-chip-purple"><span class="chip-icon">🏆</span><span>Trivia Battles</span></div>
+    <div class="skill-chip skill-chip-purple"><span class="chip-icon">📅</span><span>Weekly Tournaments</span></div>
+  </div>
+</section>
 
 <div class="review-quotes" style="width:100%;max-width:980px;margin:30px auto 22px;text-align:center;">
   <div class="section-label" style="color:var(--tl-teal);margin-bottom:10px;">Real Reviews</div>
@@ -260,13 +358,6 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
       <div style="font-size:14px;font-weight:900;color:var(--green);">— CSC0808</div>
     </div>
   </div>
-</div>
-
-<div class="conversion-trust" style="width:100%;max-width:980px;margin:0 auto 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;text-align:center;">
-  <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:16px;font-weight:900;">Free to download</div>
-  <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:16px;font-weight:900;">Available on iOS &amp; Android</div>
-  <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:16px;font-weight:900;">8+ fast brain games</div>
-  <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:16px;font-weight:900;">Built for smarter screen time</div>
 </div>
 
 
@@ -325,26 +416,6 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
 <svg fill="#22c55e" height="22" viewbox="0 0 24 24" width="22"><path d="M3.18 23.76c.31.17.67.19 1.01.07L15.5 12 4.19.17C3.85.05 3.49.07 3.18.24 2.56.58 2.25 1.29 2.25 2.25v19.5c0 .96.31 1.67.93 2.01z"></path></svg>
 <div class="sbt"><span class="sbt-s">Get it on</span><span class="sbt-b">Google Play</span></div>
 </a>
-</div>
-</section>
-<section class="brain-band">
-<div class="section-label">Brain Score</div>
-<h2 class="section-title">The number that <span style="color:var(--tl-teal);">hooks you.</span></h2>
-<p class="section-sub">Track performance across every region of your mind — in real time.</p>
-<div class="brain-row">
-<div class="brain-score-card">
-<div class="bs-label">Your brain today</div>
-<div class="bs-number" id="brain-score-num">799</div>
-<div class="bs-sub">Brain Score · Level 8</div>
-<div class="bs-bar-wrap"><div class="bs-bar" id="bs-xp-bar" style="width:0%;transition:width 3s ease-in-out;"></div></div>
-<div class="bs-bar-label" id="bs-xp-label">0 / 200 XP to Level 9</div>
-</div>
-<div class="brain-regions">
-<div class="region-row"><div class="region-top"><span class="region-name" style="color:var(--orange);">Memory</span><span class="region-pct" style="color:var(--orange);">83%</span></div><div class="region-bar"><div class="region-fill" style="width:83%;background:var(--orange);"></div></div></div>
-<div class="region-row"><div class="region-top"><span class="region-name" style="color:var(--teal);">Logic</span><span class="region-pct" style="color:var(--teal);">82%</span></div><div class="region-bar"><div class="region-fill" style="width:82%;background:var(--teal);"></div></div></div>
-<div class="region-row"><div class="region-top"><span class="region-name" style="color:var(--purple);">Language</span><span class="region-pct" style="color:var(--purple);">82%</span></div><div class="region-bar"><div class="region-fill" style="width:82%;background:var(--purple);"></div></div></div>
-<div class="region-row" style="border:1px solid rgba(236,72,153,0.3);"><div class="region-top"><span class="region-name" style="color:var(--magenta);">Speed</span><span style="font-size:10px;color:var(--magenta);font-style:italic;">needs attention</span><span class="region-pct" style="color:var(--magenta);">72%</span></div><div class="region-bar"><div class="region-fill" style="width:72%;background:var(--magenta);"></div></div></div>
-</div>
 </div>
 </section>
 <section class="compete">

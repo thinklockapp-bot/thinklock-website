@@ -1,0 +1,12 @@
+{
+  "name": "thinklock-website",
+  "version": "1.0.0",
+  "description": "ThinkLock website with Vercel Web Analytics",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static HTML site - no build required'"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.3.1"
+  }
+}

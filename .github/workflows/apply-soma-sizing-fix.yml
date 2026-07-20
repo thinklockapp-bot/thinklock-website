@@ -1,0 +1,59 @@
+name: Apply Soma sizing fix
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-soma-sizing-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out optimization branch
+        uses: actions/checkout@v4
+        with:
+          ref: production-optimization-test
+
+      - name: Correct Soma sizing and spacing
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          replacements = {
+              'index.html': (
+                  '.cta-soma{width:190px;animation:',
+                  '.cta-soma{width:190px;height:auto;max-height:none;animation:'
+              ),
+              'about.html': (
+                  '.cta-soma{width:150px;animation:',
+                  '.cta-soma{width:150px;height:auto;max-height:none;animation:'
+              ),
+              'meet-soma.html': (
+                  '.soma-img{width:clamp(260px,38vw,380px);animation:',
+                  '.soma-img{width:clamp(260px,38vw,380px);height:auto;max-height:none;object-fit:contain;animation:'
+              ),
+          }
+
+          for filename, (old, new) in replacements.items():
+              path = Path(filename)
+              text = path.read_text(encoding='utf-8')
+              if new in text:
+                  print(f'{filename}: already fixed')
+                  continue
+              if old not in text:
+                  raise SystemExit(f'{filename}: expected CSS pattern not found')
+              path.write_text(text.replace(old, new, 1), encoding='utf-8')
+              print(f'{filename}: fixed')
+          PY
+
+      - name: Commit fixes to preview branch
+        run: |
+          git config user.name 'thinklockapp-bot'
+          git config user.email 'thinklockapp-bot@users.noreply.github.com'
+          git add index.html about.html meet-soma.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Fix Soma image sizing and CTA spacing'
+          git push origin HEAD:production-optimization-test

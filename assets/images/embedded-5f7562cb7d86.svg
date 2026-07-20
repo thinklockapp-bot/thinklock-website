@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="50" fill="#1a1f35"/>
+  <!-- glow -->
+  <circle cx="50" cy="50" r="28" fill="#FFD700" opacity="0.15"/>
+  <!-- star shape -->
+  <polygon points="50,18 57,38 78,38 62,52 68,72 50,60 32,72 38,52 22,38 43,38" fill="#FFD700"/>
+  <!-- inner star -->
+  <polygon points="50,26 55,40 70,40 58,50 63,64 50,56 37,64 42,50 30,40 45,40" fill="#FFE94D"/>
+  <!-- sparkles -->
+  <circle cx="74" cy="26" r="3" fill="#FFE94D"/>
+  <circle cx="78" cy="34" r="2" fill="#FFD700"/>
+  <circle cx="26" cy="30" r="2.5" fill="#FFE94D"/>
+</svg>

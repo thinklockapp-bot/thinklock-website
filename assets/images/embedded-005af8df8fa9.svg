@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="50" fill="#1a1f35"/>
+  <!-- mane -->
+  <circle cx="50" cy="55" r="30" fill="#C8860A"/>
+  <!-- face -->
+  <circle cx="50" cy="52" r="22" fill="#F5C842"/>
+  <!-- ears -->
+  <circle cx="30" cy="34" r="8" fill="#F5C842"/>
+  <circle cx="70" cy="34" r="8" fill="#F5C842"/>
+  <circle cx="30" cy="34" r="4" fill="#E8A020"/>
+  <circle cx="70" cy="34" r="4" fill="#E8A020"/>
+  <!-- eyes -->
+  <circle cx="41" cy="50" r="5" fill="#7B5800"/>
+  <circle cx="59" cy="50" r="5" fill="#7B5800"/>
+  <circle cx="41" cy="50" r="3" fill="#111"/>
+  <circle cx="59" cy="50" r="3" fill="#111"/>
+  <circle cx="42" cy="49" r="1.2" fill="white"/>
+  <circle cx="60" cy="49" r="1.2" fill="white"/>
+  <!-- muzzle -->
+  <ellipse cx="50" cy="62" rx="11" ry="8" fill="#F0D060"/>
+  <!-- nose -->
+  <path d="M45 59 L50 62 L55 59 Q50 56 45 59 Z" fill="#C0603A"/>
+  <!-- mouth -->
+  <path d="M47 63 Q50 67 53 63" stroke="#C0603A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>

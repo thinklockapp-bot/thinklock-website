@@ -1,0 +1,336 @@
+{
+  "before_bytes": 28071045,
+  "data_urls": [
+    {
+      "hash": "834e42609f43",
+      "original_bytes": 75214,
+      "replacement": "assets/images/embedded-834e42609f43.webp",
+      "replacement_bytes": 33490
+    },
+    {
+      "hash": "2a495d06000f",
+      "original_bytes": 907,
+      "replacement": "assets/images/embedded-2a495d06000f.svg",
+      "replacement_bytes": 907
+    },
+    {
+      "hash": "3f0c3d14c873",
+      "original_bytes": 1051,
+      "replacement": "assets/images/embedded-3f0c3d14c873.svg",
+      "replacement_bytes": 1051
+    },
+    {
+      "hash": "5f7562cb7d86",
+      "original_bytes": 607,
+      "replacement": "assets/images/embedded-5f7562cb7d86.svg",
+      "replacement_bytes": 607
+    },
+    {
+      "hash": "e42bbc1176d2",
+      "original_bytes": 833389,
+      "replacement": "assets/images/embedded-e42bbc1176d2.webp",
+      "replacement_bytes": 55002
+    },
+    {
+      "hash": "84aea34ece84",
+      "original_bytes": 92783,
+      "replacement": "assets/images/embedded-84aea34ece84.webp",
+      "replacement_bytes": 39730
+    },
+    {
+      "hash": "22c8aca50d11",
+      "original_bytes": 676083,
+      "replacement": "assets/images/embedded-22c8aca50d11.webp",
+      "replacement_bytes": 49736
+    },
+    {
+      "hash": "1d9c49595ce4",
+      "original_bytes": 93022,
+      "replacement": "assets/images/embedded-1d9c49595ce4.webp",
+      "replacement_bytes": 44434
+    },
+    {
+      "hash": "aa2874c78def",
+      "original_bytes": 642366,
+      "replacement": "assets/images/embedded-aa2874c78def.webp",
+      "replacement_bytes": 51978
+    },
+    {
+      "hash": "82398970b7e3",
+      "original_bytes": 79617,
+      "replacement": "assets/images/embedded-82398970b7e3.webp",
+      "replacement_bytes": 33114
+    },
+    {
+      "hash": "ef2411ff9e38",
+      "original_bytes": 1891324,
+      "replacement": "assets/images/embedded-ef2411ff9e38.webp",
+      "replacement_bytes": 46578
+    },
+    {
+      "hash": "3bc5dff9445c",
+      "original_bytes": 90107,
+      "replacement": "assets/images/embedded-3bc5dff9445c.webp",
+      "replacement_bytes": 41312
+    },
+    {
+      "hash": "fda22b72ccfe",
+      "original_bytes": 1845034,
+      "replacement": "assets/images/embedded-fda22b72ccfe.webp",
+      "replacement_bytes": 44990
+    },
+    {
+      "hash": "da8f21640641",
+      "original_bytes": 84799,
+      "replacement": "assets/images/embedded-da8f21640641.webp",
+      "replacement_bytes": 37424
+    },
+    {
+      "hash": "e50a8f2afa49",
+      "original_bytes": 1567256,
+      "replacement": "assets/images/embedded-e50a8f2afa49.webp",
+      "replacement_bytes": 44232
+    },
+    {
+      "hash": "65cc5498a498",
+      "original_bytes": 144513,
+      "replacement": "assets/images/embedded-65cc5498a498.webp",
+      "replacement_bytes": 69928
+    },
+    {
+      "hash": "be38d355fc76",
+      "original_bytes": 992289,
+      "replacement": "assets/images/embedded-be38d355fc76.webp",
+      "replacement_bytes": 51494
+    },
+    {
+      "hash": "407b75fbc4f8",
+      "original_bytes": 72183,
+      "replacement": "assets/images/embedded-407b75fbc4f8.webp",
+      "replacement_bytes": 26056
+    },
+    {
+      "hash": "2087a067931a",
+      "original_bytes": 1736123,
+      "replacement": "assets/images/embedded-2087a067931a.webp",
+      "replacement_bytes": 54244
+    },
+    {
+      "hash": "6ebc4decec3e",
+      "original_bytes": 64107,
+      "replacement": "assets/images/embedded-6ebc4decec3e.webp",
+      "replacement_bytes": 30988
+    },
+    {
+      "hash": "e79d1b34fc92",
+      "original_bytes": 237609,
+      "replacement": "assets/images/embedded-e79d1b34fc92.webp",
+      "replacement_bytes": 25860
+    },
+    {
+      "hash": "005af8df8fa9",
+      "original_bytes": 1047,
+      "replacement": "assets/images/embedded-005af8df8fa9.svg",
+      "replacement_bytes": 1047
+    },
+    {
+      "hash": "8284f76a5478",
+      "original_bytes": 1067,
+      "replacement": "assets/images/embedded-8284f76a5478.svg",
+      "replacement_bytes": 1067
+    }
+  ],
+  "converted": [
+    {
+      "original": "game_language_learn.png",
+      "original_bytes": 1286967,
+      "webp": "game_language_learn.webp",
+      "webp_bytes": 44990,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "original": "game_logic_lite.png",
+      "original_bytes": 1075687,
+      "webp": "game_logic_lite.webp",
+      "webp_bytes": 44232,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "original": "game_memory_match.png",
+      "original_bytes": 1335872,
+      "webp": "game_memory_match.webp",
+      "webp_bytes": 46578,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "original": "game_mindpop.png",
+      "original_bytes": 676083,
+      "webp": "game_mindpop.webp",
+      "webp_bytes": 49736,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "original": "game_shape_sorter.png",
+      "original_bytes": 992289,
+      "webp": "game_shape_sorter.webp",
+      "webp_bytes": 51494,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "original": "game_speed_solver.png",
+      "original_bytes": 642366,
+      "webp": "game_speed_solver.webp",
+      "webp_bytes": 51978,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "original": "game_tap_trap.png",
+      "original_bytes": 1200165,
+      "webp": "game_tap_trap.webp",
+      "webp_bytes": 54244,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "original": "game_word_scramble.png",
+      "original_bytes": 833389,
+      "webp": "game_word_scramble.webp",
+      "webp_bytes": 55002,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "original": "happy_soma.png",
+      "original_bytes": 615034,
+      "webp": "happy_soma.webp",
+      "webp_bytes": 37814,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "original": "screenshot_brain_score.png",
+      "original_bytes": 204033,
+      "webp": "screenshot_brain_score.webp",
+      "webp_bytes": 88150,
+      "dimensions": [
+        958,
+        1536
+      ]
+    },
+    {
+      "original": "screenshot_daily_challenge.png",
+      "original_bytes": 106844,
+      "webp": "screenshot_daily_challenge.webp",
+      "webp_bytes": 40468,
+      "dimensions": [
+        918,
+        1536
+      ]
+    },
+    {
+      "original": "screenshot_weekly_tournament.png",
+      "original_bytes": 131030,
+      "webp": "screenshot_weekly_tournament.webp",
+      "webp_bytes": 51582,
+      "dimensions": [
+        1039,
+        1536
+      ]
+    },
+    {
+      "original": "soma_main.png",
+      "original_bytes": 448543,
+      "webp": "soma_main.webp",
+      "webp_bytes": 45808,
+      "dimensions": [
+        908,
+        972
+      ]
+    },
+    {
+      "original": "thinklock.png",
+      "original_bytes": 174966,
+      "webp": "thinklock.webp",
+      "webp_bytes": 46640,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "pages": {
+    "about.html": {
+      "bytes": 30209,
+      "images": 4,
+      "lazy_images": 2
+    },
+    "challenges.html": {
+      "bytes": 30602,
+      "images": 10,
+      "lazy_images": 8
+    },
+    "delete-account.html": {
+      "bytes": 10493,
+      "images": 2,
+      "lazy_images": 0
+    },
+    "download.html": {
+      "bytes": 3069,
+      "images": 0,
+      "lazy_images": 0
+    },
+    "index.html": {
+      "bytes": 54879,
+      "images": 26,
+      "lazy_images": 24
+    },
+    "meet-soma.html": {
+      "bytes": 27944,
+      "images": 3,
+      "lazy_images": 1
+    },
+    "pricing.html": {
+      "bytes": 24938,
+      "images": 2,
+      "lazy_images": 0
+    },
+    "privacy-policy.html": {
+      "bytes": 11311,
+      "images": 2,
+      "lazy_images": 0
+    },
+    "terms-of-service.html": {
+      "bytes": 10905,
+      "images": 2,
+      "lazy_images": 0
+    }
+  },
+  "after_bytes": 14103330,
+  "index_before": 14917993,
+  "index_after": 54879,
+  "estimated_loaded_assets": 1493985
+}

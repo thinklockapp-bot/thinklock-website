@@ -13,8 +13,9 @@
 html,body{background:var(--black);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
 body{min-height:100vh}
 nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(0,0,0,.94);backdrop-filter:blur(16px);z-index:10}
-.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px}
-.logo{width:38px;height:38px;border-radius:10px;background:#3BB497;display:grid;place-items:center;color:#000;font-weight:900}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;color:#fff;text-decoration:none}
+.logo{width:38px;height:38px;border-radius:10px;background:#3BB497;display:grid;place-items:center;color:#000;font-weight:900;overflow:hidden;flex-shrink:0}
+.logo img{width:100%;height:100%;object-fit:cover;border-radius:8px;display:block}
 .navlinks{display:flex;gap:24px;font-size:14px}
 .navlinks a{color:var(--text-dim);text-decoration:none}
 .navlinks a.active{color:var(--teal-bright);font-weight:800}
@@ -68,7 +69,7 @@ body.annual .annual-only{display:block}
 </head>
 <body>
 <nav>
-  <div class="brand"><div class="logo">TL</div>ThinkLock</div>
+  <a class="brand" href="index.html"><div class="logo"><img alt="ThinkLock" src="thinklock.webp" width="1024" height="1024" decoding="async" onerror="this.style.display='none';this.parentElement.innerHTML='TL';"></div><span>ThinkLock</span></a>
   <div class="navlinks">
     <a href="index.html">Home</a><a href="about.html">About Us</a><a href="meet-soma.html">Meet Soma</a><a href="challenges.html">Challenges</a><a class="active" href="pricing.html">Pricing</a>
   </div>

@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#070b16">
+  <title>Tap Trap | ThinkLock</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #070b16;
+      color: #fff;
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; margin: 0; }
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: radial-gradient(circle at 50% -10%, #24335f 0%, #10172b 42%, #070b16 100%);
+    }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, a:focus-visible { outline: 3px solid #5eead4; outline-offset: 3px; }
+    .tl-page {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: max(18px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+    }
+    .tl-main { width: 100%; max-width: 450px; }
+    .tl-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .tl-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -.02em;
+    }
+    .tl-brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #5eead4, #7c3aed);
+      font-size: 20px;
+    }
+    .tl-kicker {
+      color: rgba(255,255,255,.48);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .tl-card {
+      padding: 20px;
+      border: 1px solid rgba(148,163,184,.18);
+      border-radius: 26px;
+      background: rgba(15,23,42,.92);
+      box-shadow: 0 24px 80px rgba(0,0,0,.35);
+    }
+    .tl-game { position: relative; }
+    .tl-game-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .tl-label {
+      margin: 0;
+      color: rgba(255,255,255,.58);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+    .tl-target { margin: 4px 0 0; color: #fff; font-size: 19px; font-weight: 850; }
+    .tl-status { flex-shrink: 0; text-align: right; }
+    .tl-timer {
+      color: #4ade80;
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .tl-status-note { margin-top: 5px; color: rgba(255,255,255,.55); font-size: 11px; }
+    .tl-progress {
+      height: 5px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: rgba(255,255,255,.10);
+    }
+    .tl-progress-bar {
+      width: 0;
+      height: 100%;
+      border-radius: 99px;
+      transition: width 160ms ease-out;
+    }
+    .tl-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 9px;
+      padding: 9px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.045);
+    }
+    .tl-cell {
+      aspect-ratio: 1;
+      min-width: 0;
+      padding: 0;
+      border-radius: 16px;
+      color: #fff;
+      font-size: clamp(28px, 10vw, 42px);
+      line-height: 1;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      transition: transform 100ms ease, background 100ms ease;
+    }
+    .tl-cell:active { transform: scale(.92); }
+    .tl-feedback {
+      min-height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .tl-intro-overlay {
+      position: absolute;
+      inset: -8px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(7,11,22,.96);
+      backdrop-filter: blur(8px);
+    }
+    .tl-intro-card {
+      width: 100%;
+      padding: 24px 18px;
+      border-radius: 22px;
+      text-align: center;
+      animation: tl-tap-trap-intro-card 420ms ease-out both;
+    }
+    .tl-intro-eyebrow {
+      margin: 0;
+      color: #99f6e4;
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .tl-intro-card h2 {
+      margin: 9px 0 4px;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -.03em;
+    }
+    .tl-intro-fruit {
+      width: 86px;
+      height: 86px;
+      display: grid;
+      place-items: center;
+      margin: 16px auto 11px;
+      border-radius: 50%;
+      font-size: 48px;
+      animation: tl-tap-trap-fruit-pulse 900ms ease-in-out infinite;
+    }
+    .tl-intro-copy { margin: 0; color: rgba(255,255,255,.62); font-size: 13px; line-height: 1.45; }
+    .tl-lock-screen { padding: 18px 2px 8px; text-align: center; }
+    .tl-lock-icon {
+      display: inline-block;
+      margin: 4px 0 18px;
+      font-size: 70px;
+      line-height: 1;
+      transform-origin: 50% 80%;
+      animation: tl-lock-jiggle 2.1s ease-in-out infinite;
+    }
+    .tl-lock-title {
+      margin: 0;
+      color: #ff334f;
+      font-size: clamp(29px, 8vw, 38px);
+      font-weight: 950;
+      line-height: 1.08;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px rgba(255,51,79,.9), 0 0 26px rgba(255,51,79,.72), 0 0 52px rgba(239,68,68,.52);
+      animation: tl-lock-title-alarm 1.1s ease-in-out infinite;
+    }
+    .tl-demo-note {
+      margin: 10px 0 0;
+      color: rgba(255,255,255,.64);
+      font-size: 15px;
+      font-weight: 650;
+    }
+    .tl-lock-copy {
+      max-width: 310px;
+      margin: 28px auto 0;
+      color: rgba(255,255,255,.86);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+    .tl-start-button {
+      width: 100%;
+      margin-top: 30px;
+      padding: 16px 18px;
+      border: 0;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #14b8a6, #7c3aed);
+      color: #fff;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 850;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(20,184,166,.28);
+      animation: tl-button-pulse 1.55s ease-in-out infinite;
+    }
+    .tl-start-button:active { transform: scale(.97); }
+    .tl-hit-splash {
+      position: absolute;
+      z-index: 8;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+    }
+    .tl-hit-ring {
+      position: absolute;
+      inset: -20px;
+      border: 3px solid var(--splash-color);
+      border-radius: 50%;
+      animation: tl-hit-ring 480ms ease-out forwards;
+    }
+    .tl-hit-drop {
+      position: absolute;
+      left: 1px;
+      top: 1px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--splash-color);
+      box-shadow: 0 0 10px var(--splash-color);
+      transform: rotate(var(--angle)) translateY(-8px);
+      animation: tl-hit-drop 520ms cubic-bezier(.1,.75,.25,1) forwards;
+    }
+    .tl-complete { padding: 14px 2px 4px; text-align: center; }
+    .tl-unlock-stage {
+      position: relative;
+      width: 92px;
+      height: 92px;
+      margin: 0 auto 10px;
+    }
+    .tl-final-lock {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 62px;
+      line-height: 1;
+    }
+    .tl-final-lock.closed { animation: tl-lock-bust 1.35s ease-out .5s forwards; }
+    .tl-final-lock.open { opacity: 0; animation: tl-lock-open 1.35s cubic-bezier(.2,.9,.25,1.25) .5s forwards; }
+    .tl-unlock-burst {
+      position: absolute;
+      inset: 12px;
+      border: 4px solid #5eead4;
+      border-radius: 50%;
+      opacity: 0;
+      animation: tl-unlock-burst 1.35s ease-out .5s forwards;
+    }
+    .tl-complete-label {
+      color: #5eead4;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .tl-complete h1 { margin: 8px 0 16px; font-size: 30px; line-height: 1.08; letter-spacing: -.04em; }
+    .tl-result {
+      padding: 14px 12px;
+      border: 1px solid rgba(94,234,212,.24);
+      border-radius: 16px;
+      background: rgba(20,184,166,.1);
+    }
+    .tl-score { margin: 0; color: #99f6e4; font-size: 22px; font-weight: 900; }
+    .tl-rank { margin: 6px 0 0; color: rgba(255,255,255,.76); font-size: 14px; line-height: 1.4; }
+    .tl-tagline { max-width: 340px; margin: 20px auto 0; color: rgba(255,255,255,.9); font-size: 17px; font-weight: 850; line-height: 1.45; }
+    .tl-tagline span { display: block; }
+    .tl-action {
+      display: block;
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px 18px;
+      border: 0;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #14b8a6, #7c3aed);
+      color: #fff;
+      text-decoration: none;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 850;
+      cursor: pointer;
+      touch-action: manipulation;
+      box-shadow: 0 0 22px rgba(94,234,212,.45), 0 0 48px rgba(124,58,237,.4);
+      animation: tl-final-cta-pulse 1.15s ease-in-out infinite;
+    }
+    .tl-footer-note { margin: 17px auto 0; color: rgba(255,255,255,.34); font-size: 11px; line-height: 1.5; text-align: center; }
+    @keyframes tl-tap-trap-intro-card {
+      0% { opacity: 0; transform: translateY(10px) scale(.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes tl-tap-trap-fruit-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.14); }
+    }
+    @keyframes tl-lock-jiggle {
+      0%, 72%, 100% { transform: rotate(0deg) translateX(0); }
+      78% { transform: rotate(-4deg) translateX(-2px); }
+      84% { transform: rotate(4deg) translateX(2px); }
+      90% { transform: rotate(-2deg) translateX(-1px); }
+      96% { transform: rotate(2deg) translateX(1px); }
+    }
+    @keyframes tl-button-pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(20,184,166,.24); }
+      50% { transform: scale(1.025); box-shadow: 0 14px 38px rgba(124,58,237,.42); }
+    }
+    @keyframes tl-lock-title-alarm {
+      0%, 100% {
+        transform: scale(1);
+        color: #ff334f;
+        text-shadow: 0 0 9px rgba(255,51,79,.8), 0 0 24px rgba(255,51,79,.62), 0 0 46px rgba(239,68,68,.42);
+      }
+      45% {
+        transform: scale(1.075);
+        color: #ff7588;
+        text-shadow: 0 0 14px rgba(255,117,136,1), 0 0 38px rgba(255,51,79,.95), 0 0 78px rgba(239,68,68,.82);
+      }
+      60% {
+        transform: scale(1.025);
+        color: #ff4961;
+      }
+    }
+    @keyframes tl-hit-ring {
+      0% { opacity: 1; transform: scale(.25); }
+      100% { opacity: 0; transform: scale(1.65); }
+    }
+    @keyframes tl-hit-drop {
+      0% { opacity: 1; transform: rotate(var(--angle)) translateY(-7px) scale(1); }
+      100% { opacity: 0; transform: rotate(var(--angle)) translateY(-48px) scale(.15); }
+    }
+    @keyframes tl-lock-bust {
+      0%, 34% { opacity: 1; transform: rotate(0deg) scale(1); }
+      40% { transform: rotate(-7deg) scale(1.03); }
+      47% { transform: rotate(7deg) scale(1.06); }
+      54% { transform: rotate(-5deg) scale(1.09); }
+      61% { opacity: 1; transform: rotate(5deg) scale(1.16); }
+      70%, 100% { opacity: 0; transform: rotate(0deg) scale(1.75); }
+    }
+    @keyframes tl-lock-open {
+      0%, 67% { opacity: 0; transform: scale(.35) rotate(-12deg); }
+      78% { opacity: 1; transform: scale(1.28) rotate(4deg); }
+      90% { transform: scale(.92) rotate(-2deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+    @keyframes tl-unlock-burst {
+      0%, 58% { opacity: 0; transform: scale(.25); }
+      68% { opacity: .95; }
+      100% { opacity: 0; transform: scale(1.8); }
+    }
+    @keyframes tl-final-cta-pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(94,234,212,.42), 0 0 42px rgba(124,58,237,.34); }
+      50% { transform: scale(1.045); box-shadow: 0 0 32px rgba(94,234,212,.78), 0 0 68px rgba(124,58,237,.7); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tl-lock-icon, .tl-lock-title, .tl-start-button, .tl-intro-card, .tl-intro-fruit,
+      .tl-final-lock, .tl-unlock-burst, .tl-action, .tl-hit-ring, .tl-hit-drop { animation: none; }
+      .tl-final-lock.closed { display: none; }
+      .tl-final-lock.open { opacity: 1; }
+    }
+    @media (min-width: 560px) { .tl-card { padding: 28px; } }
+  </style>
+</head>
+<body>
+  <div class="tl-page">
+    <main class="tl-main">
+      <header class="tl-header">
+        <div class="tl-brand" aria-label="ThinkLock">
+          <span class="tl-brand-mark" aria-hidden="true">🧠</span>
+          <span>ThinkLock</span>
+        </div>
+        <span class="tl-kicker">Quick brain break</span>
+      </header>
+      <section class="tl-card" id="app" aria-live="polite"></section>
+      <p class="tl-footer-note">ThinkLock helps you pause, play, and choose what gets your attention.</p>
+    </main>
+  </div>
+  <script>
+    (() => {
+      "use strict";
+
+      const TAP_TRAP_VARIANTS = [
+        { target: "🍓", label: "strawberries", goal: 15, seed: 731, accent: "#fb7185" },
+        { target: "🍊", label: "oranges", goal: 15, seed: 1847, accent: "#fb923c" },
+        { target: "🍑", label: "peaches", goal: 15, seed: 2933, accent: "#fb7185" },
+        { target: "🍉", label: "watermelons", goal: 15, seed: 4129, accent: "#4ade80" },
+        { target: "🍇", label: "grapes", goal: 15, seed: 5791, accent: "#c084fc" }
+      ];
+      const FRUITS = ["🍎", "🍌", "🍊", "🍇", "🍓", "🍋", "🍑", "🍉"];
+      const ROUND_SECONDS = 18;
+      const INTRO_DURATION_MS = 3500;
+      const TARGET_CHANCE = 0.434;
+      const SPAWN_INTERVAL_MS = 700;
+      const GRID_SIZE = 9;
+
+      const params = new URLSearchParams(window.location.search);
+      const requestedVariant = Number.parseInt(params.get("variant") || "", 10);
+      const variantIndex = Number.isFinite(requestedVariant)
+        ? ((requestedVariant % TAP_TRAP_VARIANTS.length) + TAP_TRAP_VARIANTS.length) % TAP_TRAP_VARIANTS.length
+        : Math.floor(Math.random() * TAP_TRAP_VARIANTS.length);
+      const config = TAP_TRAP_VARIANTS[variantIndex];
+      const app = document.getElementById("app");
+      const decoys = FRUITS.filter((fruit) => fruit !== config.target);
+
+      let seed = (config.seed + Math.floor(Date.now() / 1000)) >>> 0;
+      let nextId = 1;
+      let cells = [];
+      let hits = 0;
+      let timeLeft = ROUND_SECONDS;
+      let started = false;
+      let done = false;
+      let introTimerId = null;
+      let timerId = null;
+      let spawnerId = null;
+      let feedbackTimerId = null;
+
+      function handleMetaCtaClick() {
+        if (typeof FbPlayableAd !== "undefined" &&
+            typeof FbPlayableAd.onCTAClick === "function") {
+          FbPlayableAd.onCTAClick();
+        }
+      }
+
+      function random() {
+        seed = (Math.imul(1664525, seed) + 1013904223) >>> 0;
+        return seed / 4294967296;
+      }
+
+      function makeCell() {
+        const isTarget = random() < TARGET_CHANCE;
+        return {
+          id: nextId++,
+          emoji: isTarget ? config.target : decoys[Math.floor(random() * decoys.length)],
+          isTarget
+        };
+      }
+
+      function makeGrid() {
+        const grid = Array.from({ length: GRID_SIZE }, makeCell);
+        [0, 2, 4, 6, 8].forEach((index) => {
+          grid[index] = { id: nextId++, emoji: config.target, isTarget: true };
+        });
+        return grid;
+      }
+
+      function renderLockScreen() {
+        app.innerHTML = `
+          <div class="tl-lock-screen">
+            <div class="tl-lock-icon" aria-hidden="true">🔒</div>
+            <h1 class="tl-lock-title">YOUR APPS ARE NOW LOCKED!</h1>
+            <p class="tl-demo-note">(JK, this is only a demo)</p>
+            <p class="tl-lock-copy">Complete the challenge to unlock your apps</p>
+            <p class="tl-demo-note">(This is how our app-lock feature works)</p>
+            <button class="tl-start-button" id="start-challenge" type="button">Complete Challenge</button>
+          </div>
+        `;
+        document.getElementById("start-challenge").addEventListener("click", () => {
+          cells = makeGrid();
+          renderGame();
+          introTimerId = window.setTimeout(startGame, INTRO_DURATION_MS);
+        });
+      }
+
+      function renderGame() {
+        app.innerHTML = `
+          <section class="tl-game" aria-label="Tap Trap challenge">
+            <div class="tl-game-head">
+              <div>
+                <p class="tl-label">Tap Trap</p>
+                <p class="tl-target">Find ${config.target}</p>
+              </div>
+              <div class="tl-status">
+                <div class="tl-timer" id="timer">READY</div>
+                <div class="tl-status-note" id="status-note">starts automatically</div>
+              </div>
+            </div>
+            <div class="tl-progress"><div class="tl-progress-bar" id="progress"></div></div>
+            <div class="tl-grid" id="grid" aria-label="Tap Trap challenge board"></div>
+            <div class="tl-feedback" id="feedback" aria-live="polite"></div>
+            <div class="tl-intro-overlay" id="intro" role="status" aria-live="polite">
+              <div class="tl-intro-card" id="intro-card">
+                <p class="tl-intro-eyebrow">Get ready</p>
+                <h2>Tap only the target fruit</h2>
+                <div class="tl-intro-fruit" id="intro-fruit" aria-label="${config.label}">${config.target}</div>
+                <p class="tl-intro-copy">Ignore every other fruit. Your 15-tap challenge starts now.</p>
+              </div>
+            </div>
+          </section>
+        `;
+        const introCard = document.getElementById("intro-card");
+        const introFruit = document.getElementById("intro-fruit");
+        const grid = document.getElementById("grid");
+        introCard.style.background = `linear-gradient(145deg, ${config.accent}25, rgba(15,23,42,.98))`;
+        introCard.style.border = `1px solid ${config.accent}66`;
+        introCard.style.boxShadow = `0 18px 45px ${config.accent}20`;
+        introFruit.style.background = `${config.accent}26`;
+        introFruit.style.border = `2px solid ${config.accent}88`;
+        grid.style.border = `1px solid ${config.accent}35`;
+        renderGrid();
+        updateStatus();
+      }
+
+      function renderGrid() {
+        const board = document.getElementById("grid");
+        if (!board) return;
+        board.innerHTML = "";
+        cells.forEach((cell, index) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "tl-cell";
+          button.setAttribute("aria-label", cell.isTarget ? `Tap ${config.label}` : "Decoy");
+          button.textContent = cell.emoji;
+          button.style.border = cell.isTarget
+            ? `1.5px solid ${config.accent}55`
+            : "1.5px solid rgba(255,255,255,.10)";
+          button.style.background = cell.isTarget
+            ? `${config.accent}18`
+            : "rgba(255,255,255,.06)";
+          button.addEventListener("pointerdown", (event) => {
+            event.preventDefault();
+            handleTap(index, button);
+          });
+          board.appendChild(button);
+        });
+      }
+
+      function updateStatus() {
+        const timer = document.getElementById("timer");
+        const statusNote = document.getElementById("status-note");
+        const progress = document.getElementById("progress");
+        if (!timer || !statusNote || !progress) return;
+        timer.textContent = started ? `${timeLeft}s` : "READY";
+        timer.style.fontSize = started ? "30px" : "17px";
+        timer.style.color = timeLeft <= 5 ? "#fb7185" : timeLeft <= 9 ? "#fbbf24" : "#4ade80";
+        statusNote.textContent = started ? `${hits}/${config.goal} hits` : "starts automatically";
+        progress.style.width = `${Math.min(100, (hits / config.goal) * 100)}%`;
+        progress.style.background = config.accent;
+      }
+
+      function setFeedback(type) {
+        const feedback = document.getElementById("feedback");
+        if (!feedback) return;
+        feedback.textContent = type === "hit" ? "Nice tap!" : "Watch the target!";
+        feedback.style.color = type === "hit" ? "#86efac" : "#fda4af";
+        window.clearTimeout(feedbackTimerId);
+        feedbackTimerId = window.setTimeout(() => {
+          const current = document.getElementById("feedback");
+          if (current) current.textContent = "";
+        }, 260);
+      }
+
+      function showHitSplash(button) {
+        const game = document.querySelector(".tl-game");
+        if (!game || !button) return;
+        const gameRect = game.getBoundingClientRect();
+        const buttonRect = button.getBoundingClientRect();
+        const splash = document.createElement("div");
+        splash.className = "tl-hit-splash";
+        splash.style.left = `${buttonRect.left - gameRect.left + buttonRect.width / 2}px`;
+        splash.style.top = `${buttonRect.top - gameRect.top + buttonRect.height / 2}px`;
+        splash.style.setProperty("--splash-color", config.accent);
+        const ring = document.createElement("span");
+        ring.className = "tl-hit-ring";
+        splash.appendChild(ring);
+        for (let index = 0; index < 8; index += 1) {
+          const drop = document.createElement("span");
+          drop.className = "tl-hit-drop";
+          drop.style.setProperty("--angle", `${index * 45}deg`);
+          splash.appendChild(drop);
+        }
+        game.appendChild(splash);
+        window.setTimeout(() => splash.remove(), 560);
+      }
+
+      function handleTap(index, button) {
+        if (done || !started || !cells[index]) return;
+        const cell = cells[index];
+        if (cell.isTarget) showHitSplash(button);
+        cells[index] = makeCell();
+        renderGrid();
+        if (cell.isTarget) {
+          hits += 1;
+          setFeedback("hit");
+          updateStatus();
+          if (hits >= config.goal) finish();
+        } else {
+          setFeedback("miss");
+        }
+      }
+
+      function startGame() {
+        if (started || done) return;
+        started = true;
+        const intro = document.getElementById("intro");
+        if (intro) intro.remove();
+        const deadline = Date.now() + ROUND_SECONDS * 1000;
+        updateStatus();
+        timerId = window.setInterval(() => {
+          timeLeft = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+          updateStatus();
+          if (timeLeft <= 0) finish();
+        }, 200);
+        spawnerId = window.setInterval(() => {
+          if (done) return;
+          const first = Math.floor(random() * GRID_SIZE);
+          const second = Math.floor(random() * GRID_SIZE);
+          cells[first] = makeCell();
+          cells[second] = makeCell();
+          renderGrid();
+        }, SPAWN_INTERVAL_MS);
+      }
+
+      function clearTimers() {
+        window.clearTimeout(introTimerId);
+        window.clearTimeout(feedbackTimerId);
+        window.clearInterval(timerId);
+        window.clearInterval(spawnerId);
+      }
+
+      function finish() {
+        if (done) return;
+        done = true;
+        clearTimers();
+        showCompletion();
+      }
+
+      function showCompletion() {
+        app.innerHTML = `
+          <div class="tl-complete">
+            <div class="tl-unlock-stage" aria-label="Lock opening">
+              <div class="tl-unlock-burst"></div>
+              <div class="tl-final-lock closed" aria-hidden="true">🔒</div>
+              <div class="tl-final-lock open" aria-hidden="true">🔓</div>
+            </div>
+            <div class="tl-complete-label">Challenge complete</div>
+            <h1>Your apps are unlocked</h1>
+            <div class="tl-result">
+              <p class="tl-score">${hits}/${config.goal} correct</p>
+              <p class="tl-rank">You ranked in the top 10% of players!</p>
+            </div>
+            <p class="tl-tagline">
+              <span>Your apps aren't blocked,</span>
+              <span>they're Think-Locked!</span>
+            </p>
+            <button class="tl-action" id="cta" type="button">Get ThinkLock →</button>
+          </div>
+        `;
+        document.getElementById("cta").addEventListener("click", handleMetaCtaClick);
+      }
+
+      window.addEventListener("pagehide", clearTimers);
+      renderLockScreen();
+    })();
+  </script>
+</body>
+</html>

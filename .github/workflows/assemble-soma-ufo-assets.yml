@@ -1,0 +1,38 @@
+name: Assemble Soma UFO media assets
+
+on:
+  push:
+    paths:
+      - 'assets/media/ads/dont-tap-button/.upload-ready'
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Reassemble MP4 and GIF
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT='assets/media/ads/dont-tap-button'
+          cat "$OUT/.chunks/mp4/"*.b64 | base64 --decode > "$OUT/soma-ufo-flyby-pulse-quiver.mp4"
+          cat "$OUT/.chunks/gif/"*.b64 | base64 --decode > "$OUT/soma-ufo-flyby-pulse-quiver.gif"
+          test -s "$OUT/soma-ufo-flyby-pulse-quiver.mp4"
+          test -s "$OUT/soma-ufo-flyby-pulse-quiver.gif"
+
+      - name: Commit assembled media
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT='assets/media/ads/dont-tap-button'
+          git config user.name 'thinklockapp-bot'
+          git config user.email 'thinklockapp@gmail.com'
+          git add "$OUT/soma-ufo-flyby-pulse-quiver.mp4" "$OUT/soma-ufo-flyby-pulse-quiver.gif"
+          git rm -r "$OUT/.chunks" "$OUT/.upload-ready"
+          git commit -m 'Add Soma UFO animated ad assets'
+          git push

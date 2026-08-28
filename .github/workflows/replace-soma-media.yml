@@ -1,0 +1,41 @@
+name: Replace Soma media assets
+
+on:
+  push:
+    branches:
+      - playable-ad-prototypes
+    paths:
+      - 'playable-demos/.soma-media-upload-ready'
+
+permissions:
+  contents: write
+
+jobs:
+  replace-media:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: playable-ad-prototypes
+
+      - name: Reassemble replacement media
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE='playable-demos/.soma-media-chunks'
+          cat "$BASE/gif/"chunk_* | base64 --decode > playable-demos/soma_ufo_flyby_pulse_quiver_v2.gif
+          cat "$BASE/mp4/"chunk_* | base64 --decode > playable-demos/soma_ufo_flyby_pulse_quiver_v2.mp4
+          test -s playable-demos/soma_ufo_flyby_pulse_quiver_v2.gif
+          test -s playable-demos/soma_ufo_flyby_pulse_quiver_v2.mp4
+
+      - name: Commit replacement media and clean upload helpers
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'thinklockapp-bot'
+          git config user.email 'thinklockapp@gmail.com'
+          git add playable-demos/soma_ufo_flyby_pulse_quiver_v2.gif playable-demos/soma_ufo_flyby_pulse_quiver_v2.mp4
+          git rm -r playable-demos/.soma-media-chunks playable-demos/.soma-media-upload-ready .github/workflows/replace-soma-media.yml
+          git commit -m 'Replace Soma UFO media with stronger faster pulse'
+          git push origin playable-ad-prototypes

@@ -208,84 +208,41 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
 }
 
 
-/* Approved homepage skill + competition intro */
-.hero-skill-strip{
-  width:100%;
-  max-width:1120px;
-  margin:30px auto 28px;
-  padding:10px 12px 2px;
-  text-align:center;
-}
-.hero-skill-title{
-  margin:0 auto 14px;
-  font-size:clamp(42px,7vw,88px);
-  line-height:.98;
-  letter-spacing:-.055em;
-  font-weight:950;
-  color:#fff;
-}
-.hero-skill-title span,
-.hero-skill-title strong{
+/* Homepage Tap Trap playable promotion */
+.playable-promo{
   display:block;
+  width:min(100%,720px);
+  margin:30px auto 28px;
+  overflow:hidden;
+  position:relative;
+  z-index:2;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:28px;
+  background:#02070c;
+  box-shadow:0 24px 70px rgba(0,0,0,.42),0 0 34px rgba(29,184,160,.08);
+  cursor:pointer;
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+  -webkit-tap-highlight-color:transparent;
 }
-.hero-skill-title strong{
-  font-style:normal;
-  background:linear-gradient(90deg,var(--tl-teal),#5fa8ff,var(--tl-purple));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+.playable-promo:hover{
+  transform:translateY(-3px);
+  border-color:rgba(59,180,151,.5);
+  box-shadow:0 28px 76px rgba(0,0,0,.48),0 0 40px rgba(29,184,160,.14);
 }
-.hero-skill-sub{
-  margin:0 auto 28px;
-  max-width:760px;
-  color:rgba(255,255,255,.72);
-  font-size:clamp(18px,2.2vw,25px);
-  line-height:1.35;
-  font-weight:650;
+.playable-promo:focus-visible{
+  outline:3px solid var(--teal-bright);
+  outline-offset:4px;
 }
-.skill-chip-row{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:14px;
-  margin:0 auto 16px;
-}
-.skill-chip{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  min-height:58px;
-  padding:14px 24px;
-  border-radius:24px;
-  background:rgba(255,255,255,.035);
-  border:1px solid rgba(29,184,160,.38);
-  box-shadow:0 14px 34px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.025);
-  color:#fff;
-  font-size:clamp(16px,1.6vw,20px);
-  font-weight:850;
-  backdrop-filter:blur(10px);
-}
-.skill-chip .chip-icon{
-  color:var(--tl-teal);
-  font-size:1.25em;
-  line-height:1;
-  filter:drop-shadow(0 0 12px rgba(29,184,160,.35));
-}
-.skill-chip-purple{
-  border-color:rgba(155,93,229,.52);
-  background:rgba(155,93,229,.06);
-}
-.skill-chip-purple .chip-icon{
-  color:var(--tl-purple);
-  filter:drop-shadow(0 0 12px rgba(155,93,229,.4));
+.playable-promo video{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  pointer-events:none;
 }
 @media(max-width:700px){
-  .hero-skill-strip{margin:22px auto 24px;padding:4px 4px 0}
-  .hero-skill-title{font-size:clamp(38px,12vw,56px);line-height:1.02}
-  .hero-skill-sub{font-size:17px;margin-bottom:20px}
-  .skill-chip-row{display:grid;grid-template-columns:1fr;gap:10px;max-width:330px}
-  .skill-chip{width:100%;min-height:52px;padding:13px 18px;border-radius:20px;font-size:16px}
+  .playable-promo{margin:22px auto 24px;border-radius:20px}
 }
 
 </style>
@@ -324,25 +281,11 @@ footer{background:#000;border-top:1px solid var(--border);padding:40px 20px 32px
 <div class="glow-t"></div><div class="glow-p"></div>
 <div class="live-badge"><div class="live-dot"></div>Live matches happening now</div>
 <h1 class="headline">Think faster.<br/><span style="color:var(--tl-teal);">Play smarter.</span><br/><span style="color:var(--tl-purple);">Win more.</span></h1>
-<section aria-label="ThinkLock brain training and competition features" class="hero-skill-strip">
-<h2 class="hero-skill-title">
-<span>Sharpen your brain.</span>
-<strong>Compete daily.</strong>
-</h2>
-<p class="hero-skill-sub">Train key skills and prove them in competition.</p>
-<div class="skill-chip-row skill-chip-row-primary">
-<div class="skill-chip"><span class="chip-icon">🧠</span><span>Memory</span></div>
-<div class="skill-chip"><span class="chip-icon">◎</span><span>Focus</span></div>
-<div class="skill-chip"><span class="chip-icon">⚡</span><span>Speed</span></div>
-<div class="skill-chip"><span class="chip-icon">🧩</span><span>Logic</span></div>
-<div class="skill-chip"><span class="chip-icon">💡</span><span>Problem-Solving</span></div>
-</div>
-<div class="skill-chip-row skill-chip-row-secondary">
-<div class="skill-chip skill-chip-purple"><span class="chip-icon">👥</span><span>1v1 Matches</span></div>
-<div class="skill-chip skill-chip-purple"><span class="chip-icon">🏆</span><span>Trivia Battles</span></div>
-<div class="skill-chip skill-chip-purple"><span class="chip-icon">📅</span><span>Weekly Tournaments</span></div>
-</div>
-</section>
+<a aria-label="Play the ThinkLock Tap Trap app-lock demo" class="playable-promo" href="tap-trap-demo.html">
+<video aria-hidden="true" autoplay loop muted playsinline poster="assets/media/soma-ufo-flyby-poster.webp" preload="metadata">
+<source src="assets/media/soma-ufo-flyby.mp4" type="video/mp4"/>
+</video>
+</a>
 <div class="review-quotes" style="width:100%;max-width:980px;margin:30px auto 22px;text-align:center;">
 <div class="section-label" style="color:var(--tl-teal);margin-bottom:10px;">Real Reviews</div>
 <h2 class="section-title" style="font-size:clamp(28px,4vw,44px);margin-bottom:12px;">People are already making screen time smarter.</h2>

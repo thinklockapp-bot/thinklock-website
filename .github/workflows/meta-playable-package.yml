@@ -1,0 +1,155 @@
+name: Package and QA Meta Playable
+
+on:
+  push:
+    paths:
+      - 'meta-playable/index.html'
+      - '.github/workflows/meta-playable-package.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Static Meta compliance checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE="meta-playable/index.html"
+          test -f "$FILE"
+
+          BYTES=$(wc -c < "$FILE")
+          echo "HTML bytes: $BYTES"
+          test "$BYTES" -lt 5242880
+
+          grep -Fq 'FbPlayableAd.onCTAClick()' "$FILE"
+
+          if grep -Eiq '(XMLHttpRequest|fetch[[:space:]]*\(|WebSocket|EventSource|window\.open|location\.assign|location\.replace|window\.location|mraid\.|ExitApi\.|<iframe|src=["'"']https?://|href=["'"']https?://|url\(["'"']?https?://)' "$FILE"; then
+            echo "Disallowed external/network/redirect pattern found."
+            exit 1
+          fi
+
+          echo "Static compliance checks passed."
+
+      - name: Install Playwright
+        shell: bash
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --save-dev playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Browser interaction QA
+        shell: bash
+        run: |
+          cat > meta-playable/qa-playable.js <<'NODE'
+          const { chromium } = require('playwright');
+          const path = require('path');
+          const { pathToFileURL } = require('url');
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const viewports = [
+              { width: 390, height: 844, name: 'portrait-standard' },
+              { width: 360, height: 740, name: 'portrait-small' },
+              { width: 740, height: 360, name: 'landscape-small' }
+            ];
+
+            for (const viewport of viewports) {
+              const page = await browser.newPage({ viewport });
+              const errors = [];
+              const externalRequests = [];
+
+              page.on('pageerror', err => errors.push(String(err)));
+              page.on('console', msg => {
+                if (msg.type() === 'error') errors.push(msg.text());
+              });
+              page.on('request', req => {
+                const u = req.url();
+                if (!u.startsWith('file:')) externalRequests.push(u);
+              });
+
+              await page.addInitScript(() => {
+                window.__ctaCount = 0;
+                window.FbPlayableAd = {
+                  onCTAClick() {
+                    window.__ctaCount += 1;
+                  }
+                };
+              });
+
+              const fileUrl = pathToFileURL(path.resolve('meta-playable/index.html')).href;
+              await page.goto(fileUrl, { waitUntil: 'load' });
+
+              await page.locator('#start-challenge').waitFor({ state: 'visible' });
+
+              const overflow = await page.evaluate(() =>
+                document.documentElement.scrollWidth - document.documentElement.clientWidth
+              );
+              if (overflow > 1) throw new Error(`${viewport.name}: horizontal overflow ${overflow}px`);
+
+              if (viewport.name === 'portrait-standard') {
+                await page.locator('#start-challenge').click();
+                await page.locator('#intro').waitFor({ state: 'detached', timeout: 6000 });
+
+                let safety = 0;
+                while ((await page.locator('.tl-complete').count()) === 0 && safety < 80) {
+                  const target = page.locator('.tl-cell[aria-label^="Tap "]').first();
+                  if (await target.count()) {
+                    try {
+                      await target.click({ timeout: 500 });
+                    } catch (_) {}
+                  }
+                  await page.waitForTimeout(35);
+                  safety += 1;
+                }
+
+                await page.locator('.tl-complete').waitFor({ state: 'visible', timeout: 8000 });
+                await page.locator('#cta').click();
+                const ctaCount = await page.evaluate(() => window.__ctaCount);
+                if (ctaCount !== 1) throw new Error(`CTA fired ${ctaCount} times instead of once`);
+              }
+
+              if (errors.length) throw new Error(`${viewport.name}: browser errors: ${errors.join(' | ')}`);
+              if (externalRequests.length) throw new Error(`${viewport.name}: external requests: ${externalRequests.join(', ')}`);
+
+              await page.close();
+            }
+
+            await browser.close();
+            console.log('Browser interaction QA passed.');
+          })().catch(err => {
+            console.error(err);
+            process.exit(1);
+          });
+          NODE
+          node meta-playable/qa-playable.js
+
+      - name: Build Meta upload ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd meta-playable
+          zip -9 -j ../thinklock-meta-playable.zip index.html
+          cd ..
+          unzip -l thinklock-meta-playable.zip
+          test "$(unzip -Z1 thinklock-meta-playable.zip | wc -l)" -eq 1
+          test "$(unzip -Z1 thinklock-meta-playable.zip)" = "index.html"
+          BYTES=$(wc -c < thinklock-meta-playable.zip)
+          echo "ZIP bytes: $BYTES"
+          test "$BYTES" -lt 5242880
+          sha256sum thinklock-meta-playable.zip > thinklock-meta-playable.sha256
+
+      - name: Upload tested playable package
+        uses: actions/upload-artifact@v4
+        with:
+          name: thinklock-meta-playable
+          path: |
+            thinklock-meta-playable.zip
+            thinklock-meta-playable.sha256
+          if-no-files-found: error
+          retention-days: 30

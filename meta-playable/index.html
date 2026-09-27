@@ -430,11 +430,8 @@
       const SPAWN_INTERVAL_MS = 700;
       const GRID_SIZE = 9;
 
-      const params = new URLSearchParams(window.location.search);
-      const requestedVariant = Number.parseInt(params.get("variant") || "", 10);
-      const variantIndex = Number.isFinite(requestedVariant)
-        ? ((requestedVariant % TAP_TRAP_VARIANTS.length) + TAP_TRAP_VARIANTS.length) % TAP_TRAP_VARIANTS.length
-        : Math.floor(Math.random() * TAP_TRAP_VARIANTS.length);
+      // Keep the production playable independent of URL/query-string state.
+      const variantIndex = Math.floor(Math.random() * TAP_TRAP_VARIANTS.length);
       const config = TAP_TRAP_VARIANTS[variantIndex];
       const app = document.getElementById("app");
       const decoys = FRUITS.filter((fruit) => fruit !== config.target);

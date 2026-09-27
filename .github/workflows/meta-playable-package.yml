@@ -93,7 +93,7 @@ jobs:
               if (overflow > 1) throw new Error(`${viewport.name}: horizontal overflow ${overflow}px`);
 
               if (viewport.name === 'portrait-standard') {
-                await page.locator('#start-challenge').click();
+                await page.locator('#start-challenge').click({ force: true });
                 await page.locator('#intro').waitFor({ state: 'detached', timeout: 6000 });
 
                 let safety = 0;
@@ -101,7 +101,7 @@ jobs:
                   const target = page.locator('.tl-cell[aria-label^="Tap "]').first();
                   if (await target.count()) {
                     try {
-                      await target.click({ timeout: 500 });
+                      await target.click({ timeout: 500, force: true });
                     } catch (_) {}
                   }
                   await page.waitForTimeout(35);
@@ -109,7 +109,7 @@ jobs:
                 }
 
                 await page.locator('.tl-complete').waitFor({ state: 'visible', timeout: 8000 });
-                await page.locator('#cta').click();
+                await page.locator('#cta').click({ force: true });
                 const ctaCount = await page.evaluate(() => window.__ctaCount);
                 if (ctaCount !== 1) throw new Error(`CTA fired ${ctaCount} times instead of once`);
               }

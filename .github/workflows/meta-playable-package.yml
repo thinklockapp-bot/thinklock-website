@@ -97,18 +97,23 @@ jobs:
                 await page.locator('#intro').waitFor({ state: 'detached', timeout: 6000 });
 
                 let safety = 0;
-                while ((await page.locator('.tl-complete').count()) === 0 && safety < 80) {
-                  const target = page.locator('.tl-cell[aria-label^="Tap "]').first();
-                  if (await target.count()) {
-                    try {
-                      await target.click({ timeout: 500, force: true });
-                    } catch (_) {}
-                  }
-                  await page.waitForTimeout(35);
+                while ((await page.locator('.tl-complete').count()) === 0 && safety < 300) {
+                  const didTap = await page.evaluate(() => {
+                    const target = document.querySelector('.tl-cell[aria-label^="Tap "]');
+                    if (!target) return false;
+                    target.dispatchEvent(new PointerEvent('pointerdown', {
+                      bubbles: true,
+                      cancelable: true,
+                      pointerType: 'mouse',
+                      isPrimary: true
+                    }));
+                    return true;
+                  });
+                  await page.waitForTimeout(didTap ? 20 : 60);
                   safety += 1;
                 }
 
-                await page.locator('.tl-complete').waitFor({ state: 'visible', timeout: 8000 });
+                await page.locator('.tl-complete').waitFor({ state: 'visible', timeout: 10000 });
                 await page.locator('#cta').click({ force: true });
                 const ctaCount = await page.evaluate(() => window.__ctaCount);
                 if (ctaCount !== 1) throw new Error(`CTA fired ${ctaCount} times instead of once`);

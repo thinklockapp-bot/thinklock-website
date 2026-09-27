@@ -452,25 +452,20 @@
       let feedbackTimerId = null;
 
       function handleStoreCtaClick() {
-        // Meta Playable Ads require the final CTA to be handed back to Meta.
-        // Meta then opens the app-store destination configured on the ad.
-        if (window.FbPlayableAd && typeof window.FbPlayableAd.onCTAClick === "function") {
-          window.FbPlayableAd.onCTAClick();
+        // Meta injects FbPlayableAd into the playable runtime.
+        // The final CTA must hand control back to Meta; Meta opens the app-store destination
+        // configured on the ad and attributes the outbound action.
+        if (
+          typeof FbPlayableAd !== "undefined" &&
+          FbPlayableAd &&
+          typeof FbPlayableAd.onCTAClick === "function"
+        ) {
+          FbPlayableAd.onCTAClick();
           return;
         }
 
-        // Safe fallback for browser/local QA outside Meta's playable container.
-        const userAgent = navigator.userAgent || navigator.vendor || "";
-        const isAndroid = /android/i.test(userAgent);
-        const isIOS = /iPad|iPhone|iPod/i.test(userAgent) ||
-          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-        const destination = isAndroid
-          ? "https://play.google.com/store/apps/details?id=com.thinklock.app"
-          : isIOS
-            ? "https://apps.apple.com/us/app/thinklock/id6755414121"
-            : "https://www.thinklock.net/download.html";
-
-        window.location.assign(destination);
+        // Outside Meta's playable runtime, keep the file self-contained and do not redirect.
+        console.warn("Meta playable CTA API is unavailable in this preview environment.");
       }
 
       function random() {
